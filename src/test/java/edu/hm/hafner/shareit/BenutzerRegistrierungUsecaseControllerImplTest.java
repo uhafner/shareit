@@ -3,11 +3,19 @@ package edu.hm.hafner.shareit;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
+import edu.hm.hafner.shareit.util.AbstractDatabaseTest;
 
 /**
  * Testet die Klasse {@link BenutzerRegistrierungUsecaseControllerImpl}.
+ *
+ * @author Ulli Hafner
  */
-public class BenutzerRegistrierungUsecaseControllerImplTest extends RegistrierungsControllerImplTest {
+public class BenutzerRegistrierungUsecaseControllerImplTest extends AbstractDatabaseTest {
+    private static final String PASSWORT = "geheim";
+    private static final String EMAIL = "hafner@hm.edu";
+    private static final String NACHNAME = "Hafner";
+    private static final String VORNAME = "Ullrich";
+    
     /**
      * Zeigt, dass die Neuanlage einer Registrierung funktioniert.
      */

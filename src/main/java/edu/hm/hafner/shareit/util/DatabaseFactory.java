@@ -1,4 +1,4 @@
-package edu.hm.hafner.shareit;
+package edu.hm.hafner.shareit.util;
 
 import java.io.IOException;
 

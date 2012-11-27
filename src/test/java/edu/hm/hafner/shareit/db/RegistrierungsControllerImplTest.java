@@ -1,20 +1,23 @@
-package edu.hm.hafner.shareit;
+package edu.hm.hafner.shareit.db;
 
 import java.util.NoSuchElementException;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
+import edu.hm.hafner.shareit.Registrierung;
+import edu.hm.hafner.shareit.util.AbstractDatabaseTest;
 
 /**
  * Testet die Klasse {@link RegistrierungsControllerImpl}.
+ *
+ * @author Ulli Hafner
  */
-public class RegistrierungsControllerImplTest {
-    static final String PASSWORT = "geheim";
-    static final String EMAIL = "hafner@hm.edu";
-    static final String NACHNAME = "Hafner";
-    static final String VORNAME = "Ullrich";
+public class RegistrierungsControllerImplTest extends AbstractDatabaseTest {
+    private static final String PASSWORT = "geheim";
+    private static final String EMAIL = "hafner@hm.edu";
+    private static final String NACHNAME = "Hafner";
+    private static final String VORNAME = "Ullrich";
     
     /**
      * Zeigt, dass ein neuer Benutzer erfolgreich angelegt werden kann.
@@ -96,14 +99,6 @@ public class RegistrierungsControllerImplTest {
         verifyRegistrierungen(controller, 1);
         controller.delete(EMAIL);
         verifyRegistrierungen(controller, 0);
-    }
-    
-    /**
-     * Setzt die Datenbank zurück.
-     */
-    @Before
-    public void clearDatabase() {
-        DatabaseFactory.INSTANCE.reset();
     }
 }
 

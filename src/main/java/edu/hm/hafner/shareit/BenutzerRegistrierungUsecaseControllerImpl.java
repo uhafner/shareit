@@ -2,8 +2,14 @@ package edu.hm.hafner.shareit;
 
 import java.util.Collection;
 
+import edu.hm.hafner.shareit.db.BenutzerController;
+import edu.hm.hafner.shareit.db.BenutzerControllerImpl;
+import edu.hm.hafner.shareit.db.RegistrierungsController;
+import edu.hm.hafner.shareit.db.RegistrierungsControllerImpl;
+
 /**
- * Controller für den Anwendungsfall "Benutzer registrieren".
+ * Usecase Controller für den Anwendungsfall "Benutzer registrieren".
+ *
  * @author Ulli Hafner
  */
 public class BenutzerRegistrierungUsecaseControllerImpl implements BenutzerRegistrierungUsecaseController {

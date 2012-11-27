@@ -3,7 +3,9 @@ package edu.hm.hafner.shareit;
 import java.util.Collection;
 
 /**
- * TODO: Document type BenutzerRegistrierungUsecaseController.
+ * Usecase Controller für den Anwendungsfall "Benutzer registrieren".
+ *
+ * @author Ulli Hafner
  */
 public interface BenutzerRegistrierungUsecaseController {
     
