@@ -8,9 +8,9 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Testet die Klasse {@link RegistrierungsController}.
+ * Testet die Klasse {@link RegistrierungsControllerImpl}.
  */
-public class RegistrierungsControllerTest {
+public class RegistrierungsControllerImplTest {
     static final String PASSWORT = "geheim";
     static final String EMAIL = "hafner@hm.edu";
     static final String NACHNAME = "Hafner";
@@ -21,7 +21,7 @@ public class RegistrierungsControllerTest {
      */
     @Test
     public void testeAnlegen() {
-        RegistrierungsController controller = new RegistrierungsController();
+        RegistrierungsController controller = new RegistrierungsControllerImpl();
         
         verifyRegistrierungen(controller, 0);
         
@@ -50,7 +50,7 @@ public class RegistrierungsControllerTest {
      */
     @Test
     public void testeSucheNachEmail() {
-        RegistrierungsController controller = new RegistrierungsController();
+        RegistrierungsController controller = new RegistrierungsControllerImpl();
         
         verifyRegistrierungenMitEmail(controller, 0);
         controller.create(VORNAME, NACHNAME, EMAIL, PASSWORT);
@@ -69,7 +69,7 @@ public class RegistrierungsControllerTest {
      */
     @Test(expected = IllegalStateException.class)
     public void testeDoppelteEmail() {
-        RegistrierungsController controller = new RegistrierungsController();
+        RegistrierungsController controller = new RegistrierungsControllerImpl();
         
         controller.create(VORNAME, NACHNAME, EMAIL, PASSWORT);
         controller.create(VORNAME, NACHNAME, EMAIL, PASSWORT);
@@ -80,7 +80,7 @@ public class RegistrierungsControllerTest {
      */
     @Test(expected = NoSuchElementException.class)
     public void testeEmailBeimLoeschenNichtGefunden() {
-        RegistrierungsController controller = new RegistrierungsController();
+        RegistrierungsController controller = new RegistrierungsControllerImpl();
         
         controller.delete(EMAIL);
     }
@@ -90,7 +90,7 @@ public class RegistrierungsControllerTest {
      */
     @Test
     public void testeErfolgreichesLöschen() {
-        RegistrierungsController controller = new RegistrierungsController();
+        RegistrierungsController controller = new RegistrierungsControllerImpl();
         
         controller.create(VORNAME, NACHNAME, EMAIL, PASSWORT);
         verifyRegistrierungen(controller, 1);

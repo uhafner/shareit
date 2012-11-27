@@ -5,15 +5,15 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Testet die Klasse {@link RegistrierungsVerwaltung}.
+ * Testet die Klasse {@link BenutzerRegistrierungUsecaseControllerImpl}.
  */
-public class RegistrierungsVerwaltungTest extends RegistrierungsControllerTest {
+public class BenutzerRegistrierungUsecaseControllerImplTest extends RegistrierungsControllerImplTest {
     /**
      * Zeigt, dass die Neuanlage einer Registrierung funktioniert.
      */
     @Test
     public void testeAnlegenEinerRegistrierung() {
-        RegistrierungsVerwaltung verwaltung = new RegistrierungsVerwaltung();
+        BenutzerRegistrierungUsecaseController verwaltung = new BenutzerRegistrierungUsecaseControllerImpl();
         verifyRegistrierungen(verwaltung, 0);
         
         Registrierung benutzer = verwaltung.registriereBenutzer(VORNAME, NACHNAME, EMAIL, PASSWORT);
@@ -25,7 +25,7 @@ public class RegistrierungsVerwaltungTest extends RegistrierungsControllerTest {
         assertEquals("Falsches Passwort", PASSWORT, benutzer.getPasswort());
     }
     
-    private void verifyRegistrierungen(final RegistrierungsVerwaltung verwaltung, final int expectedNumber) {
+    private void verifyRegistrierungen(final BenutzerRegistrierungUsecaseController verwaltung, final int expectedNumber) {
         assertEquals("Falsche Anzahl registierte Benutzer", expectedNumber, verwaltung.getRegistrierungen().size());
     }
     
@@ -34,7 +34,7 @@ public class RegistrierungsVerwaltungTest extends RegistrierungsControllerTest {
      */
     @Test(expected = IllegalStateException.class)
     public void testeDoppeltenBenutzernamen() {
-        RegistrierungsVerwaltung verwaltung = new RegistrierungsVerwaltung();
+        BenutzerRegistrierungUsecaseController verwaltung = new BenutzerRegistrierungUsecaseControllerImpl();
         
         verwaltung.registriereBenutzer(VORNAME, NACHNAME, EMAIL, PASSWORT);
         verwaltung.registriereBenutzer("a", "b", EMAIL, "c");

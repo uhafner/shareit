@@ -6,15 +6,16 @@ import java.util.Collection;
  * Controller für den Anwendungsfall "Benutzer registrieren".
  * @author Ulli Hafner
  */
-public class RegistrierungsVerwaltung {
-    private final RegistrierungsController controller = new RegistrierungsController();
-    private final BenutzerController benutzerController = new BenutzerController();
+public class BenutzerRegistrierungUsecaseControllerImpl implements BenutzerRegistrierungUsecaseController {
+    private final RegistrierungsController controller = new RegistrierungsControllerImpl();
+    private final BenutzerController benutzerController = new BenutzerControllerImpl();
     
     /**
      * Liefert alle bestehenden Registrierungen zurück.
      *
      * @return die Registrierungen
      */
+    @Override
     public Collection<Registrierung> getRegistrierungen() {
         return controller.findRegistrierungen();
     }
@@ -32,6 +33,7 @@ public class RegistrierungsVerwaltung {
      *            Passwort des Benutzers
      * @return der erzeugte Benutzer
      */
+    @Override
     public Registrierung registriereBenutzer(final String vorname, final String nachname, final String email, final String passwort) {
         if (!controller.findByEmail(email).isEmpty()
                 || !benutzerController.findByEmail(email).isEmpty()) {
