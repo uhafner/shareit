@@ -1,5 +1,5 @@
 eclipse.preferences.version=1
 org.moreunit.prefixes=
 org.moreunit.test_type=junit4
-org.moreunit.unitsourcefolder=shareit.muster\:src/main/java\:shareit.muster\:src/test/java
+org.moreunit.unitsourcefolder=shareit\:src/main/java\:shareit\:src/test/java
 org.moreunit.useprojectsettings=true
