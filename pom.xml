@@ -19,6 +19,13 @@
     </developer>
   </developers>
 
+  <licenses>
+    <license>
+      <name>MIT license</name>
+      <comments>All source code is under the MIT license.</comments>
+    </license>
+  </licenses>
+
   <dependencies>
     <dependency>
       <groupId>com.google.guava</groupId>
