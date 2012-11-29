@@ -3,13 +3,13 @@ ShareIt Beispielimplementierung
 
 Enthält einige Beispiele für Services der ShareIt Verleihplattform. 
 
-Package edu.hm.hafner.shareit 
+* Package edu.hm.hafner.shareit:
   Enthält die Anwendungslogik, d.h. den Usecase Controller
-Package edu.hm.hafner.shareit.db 
+* Package edu.hm.hafner.shareit.db: 
   Enthält die Datenhaltung mit einer NoSQL Datenbank (Mongo DB)
-Package edu.hm.hafner.shareit.model
+* Package edu.hm.hafner.shareit.model:
   Enthält die Entitäten
-Package edu.hm.hafner.shareit.util
+* Package edu.hm.hafner.shareit.util:
   Enthält eine Hilfsklasse zum Erzeugen und Nutzen der NoSQL Datenbank 
 
 Das Projekt lässt sich nur in Eclipse 3.8/4.2 (Eclipse for Java Developers) importieren. 
