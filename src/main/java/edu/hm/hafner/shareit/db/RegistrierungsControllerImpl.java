@@ -10,7 +10,7 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 
-import edu.hm.hafner.shareit.Registrierung;
+import edu.hm.hafner.shareit.model.Registrierung;
 import edu.hm.hafner.shareit.util.DatabaseFactory;
 
 /**

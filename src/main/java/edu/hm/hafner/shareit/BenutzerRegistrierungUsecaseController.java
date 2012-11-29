@@ -2,6 +2,8 @@ package edu.hm.hafner.shareit;
 
 import java.util.Collection;
 
+import edu.hm.hafner.shareit.model.Registrierung;
+
 /**
  * Usecase Controller für den Anwendungsfall "Benutzer registrieren".
  *

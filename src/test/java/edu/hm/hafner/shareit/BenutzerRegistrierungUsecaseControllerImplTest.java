@@ -3,6 +3,7 @@ package edu.hm.hafner.shareit;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
+import edu.hm.hafner.shareit.model.Registrierung;
 import edu.hm.hafner.shareit.util.AbstractDatabaseTest;
 
 /**

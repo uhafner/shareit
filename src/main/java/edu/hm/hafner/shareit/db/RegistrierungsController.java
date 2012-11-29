@@ -2,7 +2,7 @@ package edu.hm.hafner.shareit.db;
 
 import java.util.Collection;
 
-import edu.hm.hafner.shareit.Registrierung;
+import edu.hm.hafner.shareit.model.Registrierung;
 
 /**
  * Erzeugt, findet und ändert Registrierungen.

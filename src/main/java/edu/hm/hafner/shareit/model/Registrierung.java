@@ -1,4 +1,4 @@
-package edu.hm.hafner.shareit;
+package edu.hm.hafner.shareit.model;
 
 /**
  * Enthält alle relevanten Daten für einen neuen Benutzer von ShareIt. Ein

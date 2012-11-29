@@ -1,4 +1,5 @@
-package edu.hm.hafner.shareit;
+package edu.hm.hafner.shareit.model;
+
 
 /**
  * Kann Bücher ausleihen und verleihen.

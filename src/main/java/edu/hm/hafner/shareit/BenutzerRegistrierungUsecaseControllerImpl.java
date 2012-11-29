@@ -6,6 +6,7 @@ import edu.hm.hafner.shareit.db.BenutzerController;
 import edu.hm.hafner.shareit.db.BenutzerControllerImpl;
 import edu.hm.hafner.shareit.db.RegistrierungsController;
 import edu.hm.hafner.shareit.db.RegistrierungsControllerImpl;
+import edu.hm.hafner.shareit.model.Registrierung;
 
 /**
  * Usecase Controller für den Anwendungsfall "Benutzer registrieren".
