@@ -22,7 +22,7 @@ public class RegistrierungsControllerImpl implements RegistrierungsController {
     private static final String NACHNAME = "nachname";
     private static final String VORNAME = "vorname";
     private static final String EMAIL = "email";
-    private static final String PASSWORT = "nachname";
+    private static final String PASSWORT = "passwort";
     
     private DBCollection getRegistrierungenCollection() {
         return DatabaseFactory.INSTANCE.getDatabase().getCollection("registrierungen");
