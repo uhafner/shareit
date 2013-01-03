@@ -35,7 +35,8 @@ public interface RegistrierungsController {
     /**
      * Liefert alle Registrierungen mit der übergebenen EMail zurück.
      *
-     * @param email die zu prüfende EMail
+     * @param email
+     *            die zu prüfende EMail
      * @return die gefundenen Registrierungen
      */
     Collection<Registrierung> findByEmail(String email);
@@ -43,7 +44,19 @@ public interface RegistrierungsController {
     /**
      * Löscht die Registrierung zur gegebenen Email aus der Datenbank.
      *
-     * @param email die Email der zu löschenden Registrierung
+     * @param email
+     *            die Email der zu löschenden Registrierung
      */
     void delete(String email);
+    
+    /**
+     * Ändert den Vornamen aller Registrierungen, die die angegebene Email
+     * haben.
+     *
+     * @param email
+     *            die Email der Datensatze, der geändert werden sollen
+     * @param geaenderterVorname
+     *            der neue Vorname
+     */
+    void setVorname(String email, String geaenderterVorname);
 }

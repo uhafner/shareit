@@ -91,5 +91,25 @@ public class RegistrierungsControllerImpl implements RegistrierungsController {
             cursor.close();
         }
     }
+    
+    @Override
+    public void setVorname(final String email, final String geaenderterVorname) {
+        List<DBObject> geaenderteRegistrierungen = Lists.newArrayList();
+        DBCursor registrierungen = queryForEmail(email);
+        try {
+            for (DBObject registrierung : registrierungen) {
+                registrierung.put(VORNAME, geaenderterVorname);
+                geaenderteRegistrierungen.add(registrierung);
+            }
+        }
+        finally {
+            registrierungen.close();
+        }
+        
+        DBCollection tabelle = getRegistrierungenCollection();
+        for (DBObject registrierung : geaenderteRegistrierungen) {
+            tabelle.save(registrierung);
+        }
+    }
 }
 
