@@ -13,7 +13,7 @@ import edu.hm.hafner.shareit.model.Benutzer;
 public class BenutzerControllerImpl implements BenutzerController {
     @Override
     public Collection<Benutzer> findByEmail(final String email) {
-        return Collections.emptyList(); // TODO: muss noch implementiert werden
+        return Collections.emptyList(); // Mehr wird für die Benutzerregistrierung nicht benötigt
     }
 }
 
