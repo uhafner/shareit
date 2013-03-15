@@ -6,6 +6,7 @@ import java.util.NoSuchElementException;
 
 import org.junit.Test;
 
+import edu.hm.hafner.shareit.model.Benutzer;
 import edu.hm.hafner.shareit.model.Registrierung;
 import edu.hm.hafner.shareit.util.AbstractDatabaseTest;
 
@@ -34,7 +35,7 @@ public class BenutzerRegistrierungUsecaseControllerImplTest extends AbstractData
     }
 
     private void pruefeInhaltRegistrierung(final BenutzerRegistrierungUsecaseController verwaltung) {
-        Registrierung benutzer = verwaltung.findeRegistrierung(TEST_EMAIL);
+        Registrierung benutzer = verwaltung.findeRegistrierung(createAdmin(), TEST_EMAIL);
 
         assertEquals("Falscher Vorname", TEST_VORNAME, benutzer.getVorname());
         assertEquals("Falscher Nachname", TEST_NACHNAME, benutzer.getNachname());
@@ -42,8 +43,16 @@ public class BenutzerRegistrierungUsecaseControllerImplTest extends AbstractData
         assertEquals("Falsches Passwort", TEST_PASSWORT, benutzer.getPasswort());
     }
 
+    private Benutzer createAdmin() {
+        return new Benutzer(TEST_EMAIL, TEST_VORNAME, TEST_NACHNAME, TEST_PASSWORT, true);
+    }
+
+    private Benutzer createBenutzer() {
+        return new Benutzer(TEST_EMAIL, TEST_VORNAME, TEST_NACHNAME, TEST_PASSWORT, false);
+    }
+
     private void pruefeErwarteteAnzahlRegistrierungen(final BenutzerRegistrierungUsecaseController verwaltung, final int expectedNumber) {
-        assertEquals("Falsche Anzahl registierte Benutzer", expectedNumber, verwaltung.findeAlleRegistrierungen().size());
+        assertEquals("Falsche Anzahl registierte Benutzer", expectedNumber, verwaltung.findeAlleRegistrierungen(createAdmin()).size());
     }
 
     /**
@@ -65,7 +74,28 @@ public class BenutzerRegistrierungUsecaseControllerImplTest extends AbstractData
     public void testeEmailNichtGefunden() {
         BenutzerRegistrierungUsecaseController verwaltung = new BenutzerRegistrierungUsecaseControllerImpl();
 
-        verwaltung.findeRegistrierung("unbekannte@email");
+        verwaltung.findeRegistrierung(createAdmin(), "unbekannte@email");
     }
+
+    /**
+     * Zeigt, dass ein normaler Nutzer nicht alle vorhandenen Registrierungen auslesen kann.
+     */
+    @Test(expected = SecurityException.class)
+    public void testeAutorisierungAlleRegistrierungen() {
+        BenutzerRegistrierungUsecaseController verwaltung = new BenutzerRegistrierungUsecaseControllerImpl();
+
+        verwaltung.findeAlleRegistrierungen(createBenutzer());
+    }
+
+    /**
+     * Zeigt, dass ein normaler Nutzer nicht eine bestimmte Registrierungen auslesen kann.
+     */
+    @Test(expected = SecurityException.class)
+    public void testeAutorisierungSpezifischeRegistrierung() {
+        BenutzerRegistrierungUsecaseController verwaltung = new BenutzerRegistrierungUsecaseControllerImpl();
+
+        verwaltung.findeRegistrierung(createBenutzer(), "eine@email");
+    }
+
 }
 

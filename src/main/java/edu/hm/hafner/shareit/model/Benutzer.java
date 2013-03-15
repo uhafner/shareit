@@ -6,6 +6,8 @@ package edu.hm.hafner.shareit.model;
  * @author Ulli Hafner
  */
 public class Benutzer extends Registrierung {
+    private final boolean hasAdminRights;
+
     /**
      * Erzeugt einen neuen {@link Benutzer}.
      *
@@ -19,7 +21,28 @@ public class Benutzer extends Registrierung {
      *            Passwort des Benutzers
      */
     public Benutzer(final String nachname, final String vorname, final String email, final String passwort) {
-        super(nachname, vorname, email, passwort);
+        this(email, nachname, vorname, passwort, false);
+    }
+
+    /**
+     * Erzeugt einen neuen {@link Benutzer} mit oder ohne Administratorrechte.
+     *
+     * @param nachname
+     *            Nachname des Benutzers
+     * @param vorname
+     *            Vorname des Benutzers
+     * @param email
+     *            Email Adresse des Benutzers
+     * @param passwort
+     *            Passwort des Benutzers
+     * @param isAdministrator
+     *            Legt fest, ob der neue Benutzer Administratorrechte hat
+     *
+     */
+    public Benutzer(final String nachname, final String vorname, final String email, final String passwort, final boolean isAdministrator) {
+        super(email, nachname, vorname, passwort);
+
+        hasAdminRights = isAdministrator;
     }
 
     /**
@@ -29,7 +52,7 @@ public class Benutzer extends Registrierung {
      *         <code>false</code> otherwise
      */
     public boolean isAdminstrator() {
-        return false;
+        return hasAdminRights;
     }
 }
 

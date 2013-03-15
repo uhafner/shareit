@@ -6,6 +6,7 @@ import edu.hm.hafner.shareit.db.BenutzerController;
 import edu.hm.hafner.shareit.db.BenutzerControllerImpl;
 import edu.hm.hafner.shareit.db.RegistrierungsController;
 import edu.hm.hafner.shareit.db.RegistrierungsControllerImpl;
+import edu.hm.hafner.shareit.model.Benutzer;
 import edu.hm.hafner.shareit.model.Registrierung;
 
 /**
@@ -18,11 +19,6 @@ public class BenutzerRegistrierungUsecaseControllerImpl implements BenutzerRegis
     private final BenutzerController benutzerController = new BenutzerControllerImpl();
 
     @Override
-    public Collection<Registrierung> findeAlleRegistrierungen() {
-        return registrierungsController.findRegistrierungen();
-    }
-
-    @Override
     public Registrierung registriereBenutzer(final String email, final String vorname, final String nachname, final String passwort) {
         if (registrierungsController.containsEmail(email) || benutzerController.containsEmail(email)) {
             throw new IllegalStateException("Die Email ist schon verwendet " + email);
@@ -31,7 +27,22 @@ public class BenutzerRegistrierungUsecaseControllerImpl implements BenutzerRegis
     }
 
     @Override
-    public Registrierung findeRegistrierung(final String email) {
+    public Collection<Registrierung> findeAlleRegistrierungen(final Benutzer aktuellerNutzer) {
+        ueberpruefeAdministratorRechte(aktuellerNutzer);
+
+        return registrierungsController.findRegistrierungen();
+    }
+
+    private void ueberpruefeAdministratorRechte(final Benutzer angemeldeterBenutzer) {
+        if (!angemeldeterBenutzer.isAdminstrator()) {
+            throw new SecurityException("Die Ausgabe aller Registrierungen darf nur von einem Administrator durchgeführt werden: " + angemeldeterBenutzer);
+        }
+    }
+
+    @Override
+    public Registrierung findeRegistrierung(final Benutzer angemeldeterBenutzer, final String email) {
+        ueberpruefeAdministratorRechte(angemeldeterBenutzer);
+
         return registrierungsController.findByPrimaryKey(email);
     }
 }

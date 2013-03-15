@@ -7,24 +7,24 @@ package edu.hm.hafner.shareit.model;
  * @author Ulli Hafner
  */
 public class Registrierung {
-    private final String nachname;
-    private final String vorname;
     private final String email;
+    private final String vorname;
+    private final String nachname;
     private final String passwort;
 
     /**
      * Erzeugt eine neue {@link Registrierung}.
      *
+     * @param email
+     *            Email Adresse des Benutzers
      * @param vorname
      *            Vorname des Benutzers
      * @param nachname
      *            Nachname des Benutzers
-     * @param email
-     *            Email Adresse des Benutzers
      * @param passwort
      *            Passwort des Benutzers
      */
-    public Registrierung(final String vorname, final String nachname, final String email, final String passwort) {
+    public Registrierung(final String email, final String vorname, final String nachname, final String passwort) {
         this.vorname = vorname;
         this.nachname = nachname;
         this.email = email;

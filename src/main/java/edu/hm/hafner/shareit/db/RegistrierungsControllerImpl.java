@@ -39,7 +39,7 @@ public class RegistrierungsControllerImpl implements RegistrierungsController {
 
         getRegistrierungenCollection().insert(registrierung);
 
-        return new Registrierung(vorname, nachname, email, passwort);
+        return new Registrierung(email, vorname, nachname, passwort);
     }
 
     /**
@@ -121,7 +121,7 @@ public class RegistrierungsControllerImpl implements RegistrierungsController {
         String email = (String)dbObject.get(EMAIL_KEY);
         String passwort = (String)dbObject.get(PASSWORT_KEY);
 
-        return new Registrierung(vorname, nachname, email, passwort);
+        return new Registrierung(email, vorname, nachname, passwort);
     }
 
     @Override
