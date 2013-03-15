@@ -30,7 +30,7 @@ public class RegistrierungsControllerImplTest extends AbstractDatabaseTest {
         controller.create(TEST_VORNAME, TEST_NACHNAME, TEST_EMAIL, TEST_PASSWORT);
 
         ueberpruefeAnzahlRegistrierungen(controller, 1);
-        ueberpruefeInhaltRegistrierung(controller, TEST_EMAIL, TEST_VORNAME);
+        ueberpruefeInhaltTestRegistrierung(controller);
 
         controller.create("Neuer Vorname", "Neuer Nachname", "Neue Email", "Neues Passwort");
 
@@ -41,14 +41,18 @@ public class RegistrierungsControllerImplTest extends AbstractDatabaseTest {
         assertEquals("Falsche Anzahl registierte Benutzer", expectedNumber, controller.findRegistrierungen().size());
     }
 
+    private void ueberpruefeInhaltTestRegistrierung(final RegistrierungsController controller) {
+        ueberpruefeInhaltRegistrierung(controller, TEST_EMAIL, TEST_VORNAME, TEST_NACHNAME, TEST_PASSWORT);
+    }
+
     private void ueberpruefeInhaltRegistrierung(final RegistrierungsController controller, final String email,
-            final String expectedVorname) {
+            final String expectedVorname, final String expectedNachname, final String expectedPasswort) {
         Registrierung benutzer = controller.findByEmail(email).iterator().next();
 
+        assertEquals("Falsche Email", email, benutzer.getEmail());
         assertEquals("Falscher Vorname", expectedVorname, benutzer.getVorname());
-        assertEquals("Falscher Nachname", TEST_NACHNAME, benutzer.getNachname());
-        assertEquals("Falsche Email", TEST_EMAIL, benutzer.getEmail());
-        assertEquals("Falsches Passwort", TEST_PASSWORT, benutzer.getPasswort());
+        assertEquals("Falscher Nachname", expectedNachname, benutzer.getNachname());
+        assertEquals("Falsches Passwort", expectedPasswort, benutzer.getPasswort());
     }
 
     /**
@@ -63,20 +67,22 @@ public class RegistrierungsControllerImplTest extends AbstractDatabaseTest {
     }
 
     /**
-     * Zeigt, dass der Vorname einer Registrierung im Nachhinein geändert werden kann.
+     * Zeigt, dass die Eigenschaften einer Registrierung im Nachhinein geändert werden können.
      */
     @Test
-    public void testeAendernVorname() {
+    public void testeAendernEigenschaften() {
         RegistrierungsController controller = new RegistrierungsControllerImpl();
 
         controller.create(TEST_VORNAME, TEST_NACHNAME, TEST_EMAIL, TEST_PASSWORT);
         ueberpruefeAnzahlRegistrierungen(controller, 1);
-        ueberpruefeInhaltRegistrierung(controller, TEST_EMAIL, TEST_VORNAME);
+        ueberpruefeInhaltTestRegistrierung(controller);
 
-        String geaenderterVorname = "Ulli";
-        controller.updateProperties(TEST_EMAIL, geaenderterVorname, TEST_NACHNAME, TEST_PASSWORT);
+        String geaenderterVorname = "Neuer Vorname";
+        String geaenderterNachname = "Neuer Nachname";
+        String geaendertesPasswort = "Neues Passwort";
+        controller.updateProperties(TEST_EMAIL, geaenderterVorname, geaenderterNachname, geaendertesPasswort);
         ueberpruefeAnzahlRegistrierungen(controller, 1);
-        ueberpruefeInhaltRegistrierung(controller, TEST_EMAIL, geaenderterVorname);
+        ueberpruefeInhaltRegistrierung(controller, TEST_EMAIL, geaenderterVorname, geaenderterNachname, geaendertesPasswort);
     }
 
     /**
