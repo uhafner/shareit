@@ -1,7 +1,6 @@
 package edu.hm.hafner.shareit;
 
 import java.util.Collection;
-import java.util.NoSuchElementException;
 
 import edu.hm.hafner.shareit.db.BenutzerController;
 import edu.hm.hafner.shareit.db.BenutzerControllerImpl;
@@ -25,28 +24,15 @@ public class BenutzerRegistrierungUsecaseControllerImpl implements BenutzerRegis
 
     @Override
     public Registrierung registriereBenutzer(final String email, final String vorname, final String nachname, final String passwort) {
-        if (isRegistrierungSchonVorhanden(email) || isBenutzerSchonVorhanden(email)) {
+        if (registrierungsController.containsEmail(email) || benutzerController.containsEmail(email)) {
             throw new IllegalStateException("Die Email ist schon verwendet " + email);
         }
         return registrierungsController.create(email, vorname, nachname, passwort);
     }
 
-    private boolean isBenutzerSchonVorhanden(final String email) {
-        return !benutzerController.findByEmail(email).isEmpty();
-    }
-
-    private boolean isRegistrierungSchonVorhanden(final String email) {
-        return !registrierungsController.findByEmail(email).isEmpty();
-    }
-
     @Override
     public Registrierung findeRegistrierung(final String email) {
-        Collection<Registrierung> registrierungen = registrierungsController.findByEmail(email);
-        if (registrierungen.isEmpty()) {
-            throw new NoSuchElementException("Keine Registrierung gefunden mit der Email " + email);
-        }
-
-        return registrierungen.iterator().next();
+        return registrierungsController.findByPrimaryKey(email);
     }
 }
 

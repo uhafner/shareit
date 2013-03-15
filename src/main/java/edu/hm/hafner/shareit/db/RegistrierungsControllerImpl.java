@@ -30,8 +30,7 @@ public class RegistrierungsControllerImpl implements RegistrierungsController {
 
     @Override
     public Registrierung create(final String email, final String vorname, final String nachname, final String passwort) {
-        Collection<Registrierung> existing = findByEmail(email);
-        if (!existing.isEmpty()) {
+        if (containsEmail(email)) {
             throw new IllegalStateException("Bereits eine Registrierung vorhanden mit der Email " + email);
         }
 
@@ -69,8 +68,8 @@ public class RegistrierungsControllerImpl implements RegistrierungsController {
     }
 
     @Override
-    public Collection<Registrierung> findByEmail(final String email) {
-        return asCollection(queryForEmail(email));
+    public Registrierung findByPrimaryKey(final String email) {
+        return convertToRegistrierung(queryByPrimaryKey(email));
     }
 
     /**
@@ -140,8 +139,11 @@ public class RegistrierungsControllerImpl implements RegistrierungsController {
     private DBObject queryByPrimaryKey(final String email) {
         DBCursor cursor = queryForEmail(email);
         try {
-            if (!cursor.hasNext()) {
+            if (cursor.size() == 0) {
                 throw new NoSuchElementException("Keiner Registrierung gefunden zur EMail " + email);
+            }
+            if (cursor.size() > 1) {
+                throw new IllegalStateException("Mehrere Registrierungen vorhanden mit der Email " + email);
             }
             return cursor.next();
         }
@@ -158,5 +160,16 @@ public class RegistrierungsControllerImpl implements RegistrierungsController {
         updateProperties(registrierung, geaenderterVorname, geaenderterNachname, geaendertesPasswort);
 
         getRegistrierungenCollection().save(registrierung);
+    }
+
+    @Override
+    public boolean containsEmail(final String email) {
+        DBCursor cursor = queryForEmail(email);
+        try {
+            return cursor.size() > 0;
+        }
+        finally {
+            cursor.close();
+        }
     }
 }

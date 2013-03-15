@@ -1,21 +1,18 @@
 package edu.hm.hafner.shareit.db;
 
-import java.util.Collection;
-
-import edu.hm.hafner.shareit.model.Benutzer;
 
 /**
- * Erzeugt, findet und ändert Registrierungen.
+ * Erzeugt, findet und ändert Benutzer.
  *
  * @author Ulli Hafner
  */
 public interface BenutzerController {
     /**
-     * Liefert alle Benutzer mit der übergebenen EMail zurück.
+     * Überprüft, ob die übergebenen EMail bereits als Benutzername verwendet wird.
      *
      * @param email
-     *            die EMail Addresse
-     * @return die Benutzer
+     *            die zu prüfende EMail
+     * @return <code>true</code> falls die Email bereits verwendet wurde, <code>false</code> sonst
      */
-    Collection<Benutzer> findByEmail(String email);
+    boolean containsEmail(String email);
 }

@@ -42,7 +42,7 @@ public interface BenutzerRegistrierungUsecaseController {
      *            die zu suchende EMail
      * @return die gefundene Registrierung
      * @throws NoSuchElementException
-     *             falls keine Registrierung mit dem Benutzername gefunden wurde
+     *             falls keine Registrierung mit dem Benutzernamen gefunden wurde
      */
     Registrierung findeRegistrierung(String email);
 }

@@ -65,8 +65,7 @@ public class BenutzerRegistrierungUsecaseControllerImplTest extends AbstractData
     public void testeEmailNichtGefunden() {
         BenutzerRegistrierungUsecaseController verwaltung = new BenutzerRegistrierungUsecaseControllerImpl();
 
-        verwaltung.registriereBenutzer(TEST_EMAIL, TEST_VORNAME, TEST_NACHNAME, TEST_PASSWORT);
-        verwaltung.findeRegistrierung("unkekannte@email");
+        verwaltung.findeRegistrierung("unbekannte@email");
     }
 }
 

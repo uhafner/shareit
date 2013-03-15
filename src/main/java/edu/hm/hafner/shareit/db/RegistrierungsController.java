@@ -1,6 +1,7 @@
 package edu.hm.hafner.shareit.db;
 
 import java.util.Collection;
+import java.util.NoSuchElementException;
 
 import edu.hm.hafner.shareit.model.Registrierung;
 
@@ -22,6 +23,7 @@ public interface RegistrierungsController {
      *            Passwort des Benutzers
      *
      * @return die neue Registrierung
+     * @throws IllegalStateException falls der Benutzername schon vergeben wurde
      */
     Registrierung create(String email, String vorname, String nachname, String passwort);
 
@@ -33,19 +35,31 @@ public interface RegistrierungsController {
     Collection<Registrierung> findRegistrierungen();
 
     /**
-     * Liefert alle Registrierungen mit der übergebenen EMail zurück.
+     * Liefert die Registrierung mit der übergebenen EMail zurück.
      *
      * @param email
      *            die zu prüfende EMail
      * @return die gefundenen Registrierungen
+     * @throws NoSuchElementException falls keine Registrierung mit dem Benutzernamen gefunden wurde
+     * @see #containsEmail(String)
      */
-    Collection<Registrierung> findByEmail(String email);
+    Registrierung findByPrimaryKey(String email);
+
+    /**
+     * Überprüft, ob die übergebenen EMail bereits als Benutzername verwendet wird.
+     *
+     * @param email
+     *            die zu prüfende EMail
+     * @return <code>true</code> falls die Email bereits verwendet wurde, <code>false</code> sonst
+     */
+    boolean containsEmail(String email);
 
     /**
      * Löscht die Registrierung zur gegebenen Email aus der Datenbank.
      *
      * @param email
      *            die Email der zu löschenden Registrierung
+     * @throws NoSuchElementException falls keine Registrierung mit dem Benutzernamen gefunden wurde
      */
     void delete(String email);
 
@@ -60,6 +74,7 @@ public interface RegistrierungsController {
      *            der neue Nachname
      * @param geaendertesPasswort
      *            das neue Passwort
+     * @throws NoSuchElementException falls keine Registrierung mit dem Benutzernamen gefunden wurde
      */
     void updateProperties(String email, String geaenderterVorname, String geaenderterNachname, String geaendertesPasswort);
 }

@@ -52,7 +52,7 @@ public class RegistrierungsControllerImplTest extends AbstractDatabaseTest {
 
     private void ueberpruefeInhaltRegistrierung(final RegistrierungsController controller, final String email,
             final String expectedVorname, final String expectedNachname, final String expectedPasswort) {
-        Registrierung benutzer = controller.findByEmail(email).iterator().next();
+        Registrierung benutzer = controller.findByPrimaryKey(email);
 
         assertEquals("Falsche Email", email, benutzer.getEmail());
         assertEquals("Falscher Vorname", expectedVorname, benutzer.getVorname());
@@ -108,24 +108,25 @@ public class RegistrierungsControllerImplTest extends AbstractDatabaseTest {
         RegistrierungsController controller = new RegistrierungsControllerImpl();
 
         String neueEmail = "Neue Email";
-        ueberpruefeAnzahlRegistrierungenMitEmail(controller, TEST_EMAIL, 0);
-        ueberpruefeAnzahlRegistrierungenMitEmail(controller, neueEmail, 0);
+
+        ueberpruefeAnzahlRegistrierungenMitEmail(controller, TEST_EMAIL, false);
+        ueberpruefeAnzahlRegistrierungenMitEmail(controller, neueEmail, false);
 
         controller.create(TEST_EMAIL, TEST_VORNAME, TEST_NACHNAME, TEST_PASSWORT);
 
-        ueberpruefeAnzahlRegistrierungenMitEmail(controller, TEST_EMAIL, 1);
-        ueberpruefeAnzahlRegistrierungenMitEmail(controller, neueEmail, 0);
+        ueberpruefeAnzahlRegistrierungenMitEmail(controller, TEST_EMAIL, true);
+        ueberpruefeAnzahlRegistrierungenMitEmail(controller, neueEmail, false);
 
         controller.create(neueEmail, TEST_VORNAME, TEST_NACHNAME, TEST_PASSWORT);
 
-        ueberpruefeAnzahlRegistrierungenMitEmail(controller, TEST_EMAIL, 1);
-        ueberpruefeAnzahlRegistrierungenMitEmail(controller, neueEmail, 1);
+        ueberpruefeAnzahlRegistrierungenMitEmail(controller, TEST_EMAIL, true);
+        ueberpruefeAnzahlRegistrierungenMitEmail(controller, neueEmail, true);
     }
 
     private void ueberpruefeAnzahlRegistrierungenMitEmail(final RegistrierungsController controller,
-            final String email, final int expectedNumber) {
-        assertEquals("Falsche Anzahl registierte Benutzer mit der Email " + email,
-                expectedNumber, controller.findByEmail(email).size());
+            final String email, final boolean expectedExists) {
+        assertEquals("Falsche Erwartung für das Auffinden eines registrierten Benutzers mit der Email " + email,
+                expectedExists, controller.containsEmail(email));
     }
 
     /**
@@ -136,10 +137,10 @@ public class RegistrierungsControllerImplTest extends AbstractDatabaseTest {
         RegistrierungsController controller = new RegistrierungsControllerImpl();
 
         controller.create(TEST_EMAIL, TEST_VORNAME, TEST_NACHNAME, TEST_PASSWORT);
-        ueberpruefeAnzahlRegistrierungenMitEmail(controller, TEST_EMAIL, 1);
+        ueberpruefeAnzahlRegistrierungenMitEmail(controller, TEST_EMAIL, true);
 
         controller.delete(TEST_EMAIL);
-        ueberpruefeAnzahlRegistrierungenMitEmail(controller, TEST_EMAIL, 0);
+        ueberpruefeAnzahlRegistrierungenMitEmail(controller, TEST_EMAIL, false);
     }
 
     /**
@@ -150,5 +151,15 @@ public class RegistrierungsControllerImplTest extends AbstractDatabaseTest {
         RegistrierungsController controller = new RegistrierungsControllerImpl();
 
         controller.delete(TEST_EMAIL);
+    }
+
+    /**
+     * Zeigt, dass eine Exception geworfen wird, falls bei der Suche nach dem primary Key kein Objekt gefunden wird.
+     */
+    @Test(expected = NoSuchElementException.class)
+    public void testeNoSuchElementFallsEmailNichtGefunden() {
+        RegistrierungsController controller = new RegistrierungsControllerImpl();
+
+        controller.findByPrimaryKey(TEST_EMAIL);
     }
 }
