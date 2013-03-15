@@ -24,11 +24,11 @@ public class BenutzerRegistrierungUsecaseControllerImpl implements BenutzerRegis
     }
 
     @Override
-    public Registrierung registriereBenutzer(final String vorname, final String nachname, final String email, final String passwort) {
+    public Registrierung registriereBenutzer(final String email, final String vorname, final String nachname, final String passwort) {
         if (isRegistrierungSchonVorhanden(email) || isBenutzerSchonVorhanden(email)) {
             throw new IllegalStateException("Die Email ist schon verwendet " + email);
         }
-        return registrierungsController.create(vorname, nachname, email, passwort);
+        return registrierungsController.create(email, vorname, nachname, passwort);
     }
 
     private boolean isBenutzerSchonVorhanden(final String email) {

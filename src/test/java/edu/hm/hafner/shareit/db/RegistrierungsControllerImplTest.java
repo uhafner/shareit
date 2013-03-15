@@ -13,10 +13,10 @@ import edu.hm.hafner.shareit.util.AbstractDatabaseTest;
  * Testet die Klasse {@link RegistrierungsController}.
  */
 public class RegistrierungsControllerImplTest extends AbstractDatabaseTest {
-    private static final String TEST_PASSWORT = "geheim";
     private static final String TEST_EMAIL = "hafner@hm.edu";
-    private static final String TEST_NACHNAME = "Hafner";
     private static final String TEST_VORNAME = "Ullrich";
+    private static final String TEST_NACHNAME = "Hafner";
+    private static final String TEST_PASSWORT = "geheim";
 
     /**
      * Zeigt, dass ein neuer Benutzer erfolgreich angelegt werden kann.
@@ -27,14 +27,19 @@ public class RegistrierungsControllerImplTest extends AbstractDatabaseTest {
 
         ueberpruefeAnzahlRegistrierungen(controller, 0);
 
-        controller.create(TEST_VORNAME, TEST_NACHNAME, TEST_EMAIL, TEST_PASSWORT);
+        controller.create(TEST_EMAIL, TEST_VORNAME, TEST_NACHNAME, TEST_PASSWORT);
 
         ueberpruefeAnzahlRegistrierungen(controller, 1);
         ueberpruefeInhaltTestRegistrierung(controller);
 
-        controller.create("Neuer Vorname", "Neuer Nachname", "Neue Email", "Neues Passwort");
+        String email = "Neue Email";
+        String vorname = "Neuer Vorname";
+        String nachname = "Neuer Nachname";
+        String passwort = "Neues Passwort";
+        controller.create(email, vorname, nachname, passwort);
 
         ueberpruefeAnzahlRegistrierungen(controller, 2);
+        ueberpruefeInhaltRegistrierung(controller, email, vorname, nachname, passwort);
     }
 
     private void ueberpruefeAnzahlRegistrierungen(final RegistrierungsController controller, final int expectedNumber) {
@@ -62,8 +67,8 @@ public class RegistrierungsControllerImplTest extends AbstractDatabaseTest {
     public void testeDoppelteEmail() {
         RegistrierungsController controller = new RegistrierungsControllerImpl();
 
-        controller.create(TEST_VORNAME, TEST_NACHNAME, TEST_EMAIL, TEST_PASSWORT);
-        controller.create(TEST_VORNAME, TEST_NACHNAME, TEST_EMAIL, TEST_PASSWORT);
+        controller.create(TEST_EMAIL, TEST_VORNAME, TEST_NACHNAME, TEST_PASSWORT);
+        controller.create(TEST_EMAIL, TEST_VORNAME, TEST_NACHNAME, TEST_PASSWORT);
     }
 
     /**
@@ -73,7 +78,7 @@ public class RegistrierungsControllerImplTest extends AbstractDatabaseTest {
     public void testeAendernEigenschaften() {
         RegistrierungsController controller = new RegistrierungsControllerImpl();
 
-        controller.create(TEST_VORNAME, TEST_NACHNAME, TEST_EMAIL, TEST_PASSWORT);
+        controller.create(TEST_EMAIL, TEST_VORNAME, TEST_NACHNAME, TEST_PASSWORT);
         ueberpruefeAnzahlRegistrierungen(controller, 1);
         ueberpruefeInhaltTestRegistrierung(controller);
 
@@ -106,12 +111,12 @@ public class RegistrierungsControllerImplTest extends AbstractDatabaseTest {
         ueberpruefeAnzahlRegistrierungenMitEmail(controller, TEST_EMAIL, 0);
         ueberpruefeAnzahlRegistrierungenMitEmail(controller, neueEmail, 0);
 
-        controller.create(TEST_VORNAME, TEST_NACHNAME, TEST_EMAIL, TEST_PASSWORT);
+        controller.create(TEST_EMAIL, TEST_VORNAME, TEST_NACHNAME, TEST_PASSWORT);
 
         ueberpruefeAnzahlRegistrierungenMitEmail(controller, TEST_EMAIL, 1);
         ueberpruefeAnzahlRegistrierungenMitEmail(controller, neueEmail, 0);
 
-        controller.create(TEST_VORNAME, TEST_NACHNAME, neueEmail, TEST_PASSWORT);
+        controller.create(neueEmail, TEST_VORNAME, TEST_NACHNAME, TEST_PASSWORT);
 
         ueberpruefeAnzahlRegistrierungenMitEmail(controller, TEST_EMAIL, 1);
         ueberpruefeAnzahlRegistrierungenMitEmail(controller, neueEmail, 1);
@@ -130,7 +135,7 @@ public class RegistrierungsControllerImplTest extends AbstractDatabaseTest {
     public void testeErfolgreichesLoeschen() {
         RegistrierungsController controller = new RegistrierungsControllerImpl();
 
-        controller.create(TEST_VORNAME, TEST_NACHNAME, TEST_EMAIL, TEST_PASSWORT);
+        controller.create(TEST_EMAIL, TEST_VORNAME, TEST_NACHNAME, TEST_PASSWORT);
         ueberpruefeAnzahlRegistrierungenMitEmail(controller, TEST_EMAIL, 1);
 
         controller.delete(TEST_EMAIL);

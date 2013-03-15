@@ -29,7 +29,7 @@ public class RegistrierungsControllerImpl implements RegistrierungsController {
     }
 
     @Override
-    public Registrierung create(final String vorname, final String nachname, final String email, final String passwort) {
+    public Registrierung create(final String email, final String vorname, final String nachname, final String passwort) {
         Collection<Registrierung> existing = findByEmail(email);
         if (!existing.isEmpty()) {
             throw new IllegalStateException("Bereits eine Registrierung vorhanden mit der Email " + email);

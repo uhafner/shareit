@@ -28,7 +28,7 @@ public class BenutzerRegistrierungUsecaseControllerImplTest extends AbstractData
         BenutzerRegistrierungUsecaseController verwaltung = new BenutzerRegistrierungUsecaseControllerImpl();
         pruefeErwarteteAnzahlRegistrierungen(verwaltung, 0);
 
-        verwaltung.registriereBenutzer(TEST_VORNAME, TEST_NACHNAME, TEST_EMAIL, TEST_PASSWORT);
+        verwaltung.registriereBenutzer(TEST_EMAIL, TEST_VORNAME, TEST_NACHNAME, TEST_PASSWORT);
         pruefeErwarteteAnzahlRegistrierungen(verwaltung, 1);
         pruefeInhaltRegistrierung(verwaltung);
     }
@@ -53,9 +53,9 @@ public class BenutzerRegistrierungUsecaseControllerImplTest extends AbstractData
     public void testeDoppeltenBenutzernamen() {
         BenutzerRegistrierungUsecaseController verwaltung = new BenutzerRegistrierungUsecaseControllerImpl();
 
-        verwaltung.registriereBenutzer(TEST_VORNAME, TEST_NACHNAME, TEST_EMAIL, TEST_PASSWORT);
+        verwaltung.registriereBenutzer(TEST_EMAIL, TEST_VORNAME, TEST_NACHNAME, TEST_PASSWORT);
         String gleicheEmail = TEST_EMAIL;
-        verwaltung.registriereBenutzer("Neuer Vorname", "Neuer Nachname", gleicheEmail, "Neues Passwort");
+        verwaltung.registriereBenutzer(gleicheEmail, "Neuer Vorname", "Neuer Nachname", "Neues Passwort");
     }
 
     /**
@@ -65,7 +65,7 @@ public class BenutzerRegistrierungUsecaseControllerImplTest extends AbstractData
     public void testeEmailNichtGefunden() {
         BenutzerRegistrierungUsecaseController verwaltung = new BenutzerRegistrierungUsecaseControllerImpl();
 
-        verwaltung.registriereBenutzer(TEST_VORNAME, TEST_NACHNAME, TEST_EMAIL, TEST_PASSWORT);
+        verwaltung.registriereBenutzer(TEST_EMAIL, TEST_VORNAME, TEST_NACHNAME, TEST_PASSWORT);
         verwaltung.findeRegistrierung("unkekannte@email");
     }
 }

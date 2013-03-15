@@ -12,18 +12,18 @@ import edu.hm.hafner.shareit.model.Registrierung;
 public interface RegistrierungsController {
     /**
      * Registriert einen neuen Benutzer.
-     *
+     * @param email
+     *            Email Adresse des Benutzers
      * @param vorname
      *            Vorname des Benutzers
      * @param nachname
      *            Nachname des Benutzers
-     * @param email
-     *            Email Adresse des Benutzers
      * @param passwort
      *            Passwort des Benutzers
+     *
      * @return die neue Registrierung
      */
-    Registrierung create(String vorname, String nachname, String email, String passwort);
+    Registrierung create(String email, String vorname, String nachname, String passwort);
 
     /**
      * Liefert alle Registrierungen zurück.

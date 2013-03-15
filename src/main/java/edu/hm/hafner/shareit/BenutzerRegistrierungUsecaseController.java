@@ -21,18 +21,19 @@ public interface BenutzerRegistrierungUsecaseController {
     /**
      * Registriert einen neuen Benutzer.
      *
+     * @param email
+     *            Email Adresse des Benutzers
      * @param vorname
      *            Vorname des Benutzers
      * @param nachname
      *            Nachname des Benutzers
-     * @param email
-     *            Email Adresse des Benutzers
      * @param passwort
      *            Passwort des Benutzers
      * @return der erzeugte Benutzer
-     * @throws IllegalStateException falls der Benutzername schon vergeben wurde
+     * @throws IllegalStateException
+     *             falls der Benutzername schon vergeben wurde
      */
-    Registrierung registriereBenutzer(String vorname, String nachname, String email, String passwort);
+    Registrierung registriereBenutzer(String email, String vorname, String nachname, String passwort);
 
     /**
      * Findet die Registrierung mit der übergebenen EMail.
@@ -40,7 +41,8 @@ public interface BenutzerRegistrierungUsecaseController {
      * @param email
      *            die zu suchende EMail
      * @return die gefundene Registrierung
-     * @throws NoSuchElementException falls keine Registrierung mit dem Benutzername gefunden wurde
+     * @throws NoSuchElementException
+     *             falls keine Registrierung mit dem Benutzername gefunden wurde
      */
     Registrierung findeRegistrierung(String email);
 }
