@@ -74,7 +74,7 @@ public class RegistrierungsControllerImplTest extends AbstractDatabaseTest {
         ueberpruefeInhaltRegistrierung(controller, TEST_EMAIL, TEST_VORNAME);
 
         String geaenderterVorname = "Ulli";
-        controller.updateProperties(TEST_EMAIL, geaenderterVorname);
+        controller.updateProperties(TEST_EMAIL, geaenderterVorname, TEST_NACHNAME, TEST_PASSWORT);
         ueberpruefeAnzahlRegistrierungen(controller, 1);
         ueberpruefeInhaltRegistrierung(controller, TEST_EMAIL, geaenderterVorname);
     }
@@ -86,7 +86,7 @@ public class RegistrierungsControllerImplTest extends AbstractDatabaseTest {
     public void testeEmailBeimAendernNichtGefunden() {
         RegistrierungsController controller = new RegistrierungsControllerImpl();
 
-        controller.updateProperties(TEST_EMAIL, TEST_VORNAME);
+        controller.updateProperties(TEST_EMAIL, TEST_VORNAME, TEST_NACHNAME, TEST_PASSWORT);
     }
 
     /**

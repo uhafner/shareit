@@ -34,15 +34,33 @@ public class RegistrierungsControllerImpl implements RegistrierungsController {
         if (!existing.isEmpty()) {
             throw new IllegalStateException("Bereits eine Registrierung vorhanden mit der Email " + email);
         }
-        BasicDBObject registrierung = new BasicDBObject();
-        registrierung.append(VORNAME_KEY, vorname);
-        registrierung.append(NACHNAME_KEY, nachname);
-        registrierung.append(EMAIL_KEY, email);
-        registrierung.append(PASSWORT_KEY, passwort);
+
+        BasicDBObject registrierung = new BasicDBObject(EMAIL_KEY, email);
+        updateProperties(registrierung, vorname, nachname, passwort);
 
         getRegistrierungenCollection().insert(registrierung);
 
         return new Registrierung(vorname, nachname, email, passwort);
+    }
+
+    /**
+     * Ändert den Vornamen, Nachnamen und das Passwort der Registrierung. Sind diese Werte noch nicht gesetzt, werden
+     * sie neu angelegt.
+     *
+     * @param registrierung
+     *            die zu ändernde Registrierung
+     * @param vorname
+     *            Vorname des Benutzers
+     * @param nachname
+     *            Nachname des Benutzers
+     * @param passwort
+     *            Passwort des Benutzers
+     */
+    private void updateProperties(final DBObject registrierung,
+            final String vorname, final String nachname, final String passwort) {
+        registrierung.put(VORNAME_KEY, vorname);
+        registrierung.put(NACHNAME_KEY, nachname);
+        registrierung.put(PASSWORT_KEY, passwort);
     }
 
     @Override
@@ -133,10 +151,11 @@ public class RegistrierungsControllerImpl implements RegistrierungsController {
     }
 
     @Override
-    public void updateProperties(final String email, final String geaenderterVorname) {
+    public void updateProperties(final String email,
+            final String geaenderterVorname, final String geaenderterNachname, final String geaendertesPasswort) {
         DBObject registrierung = queryByPrimaryKey(email);
 
-        registrierung.put(VORNAME_KEY, geaenderterVorname);
+        updateProperties(registrierung, geaenderterVorname, geaenderterNachname, geaendertesPasswort);
 
         getRegistrierungenCollection().save(registrierung);
     }

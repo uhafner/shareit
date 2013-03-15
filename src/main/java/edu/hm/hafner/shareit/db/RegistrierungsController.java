@@ -56,6 +56,10 @@ public interface RegistrierungsController {
      *            die Email der Registrierung, der geändert werden soll
      * @param geaenderterVorname
      *            der neue Vorname
+     * @param geaenderterNachname
+     *            der neue Nachname
+     * @param geaendertesPasswort
+     *            das neue Passwort
      */
-    void updateProperties(String email, String geaenderterVorname);
+    void updateProperties(String email, String geaenderterVorname, String geaenderterNachname, String geaendertesPasswort);
 }

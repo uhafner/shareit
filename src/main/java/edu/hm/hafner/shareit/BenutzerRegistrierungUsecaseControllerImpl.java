@@ -15,12 +15,12 @@ import edu.hm.hafner.shareit.model.Registrierung;
  * @author Ulli Hafner
  */
 public class BenutzerRegistrierungUsecaseControllerImpl implements BenutzerRegistrierungUsecaseController {
-    private final RegistrierungsController controller = new RegistrierungsControllerImpl();
+    private final RegistrierungsController registrierungsController = new RegistrierungsControllerImpl();
     private final BenutzerController benutzerController = new BenutzerControllerImpl();
 
     @Override
     public Collection<Registrierung> findeAlleRegistrierungen() {
-        return controller.findRegistrierungen();
+        return registrierungsController.findRegistrierungen();
     }
 
     @Override
@@ -28,7 +28,7 @@ public class BenutzerRegistrierungUsecaseControllerImpl implements BenutzerRegis
         if (isRegistrierungSchonVorhanden(email) || isBenutzerSchonVorhanden(email)) {
             throw new IllegalStateException("Die Email ist schon verwendet " + email);
         }
-        return controller.create(vorname, nachname, email, passwort);
+        return registrierungsController.create(vorname, nachname, email, passwort);
     }
 
     private boolean isBenutzerSchonVorhanden(final String email) {
@@ -36,12 +36,12 @@ public class BenutzerRegistrierungUsecaseControllerImpl implements BenutzerRegis
     }
 
     private boolean isRegistrierungSchonVorhanden(final String email) {
-        return !controller.findByEmail(email).isEmpty();
+        return !registrierungsController.findByEmail(email).isEmpty();
     }
 
     @Override
     public Registrierung findeRegistrierung(final String email) {
-        Collection<Registrierung> registrierungen = controller.findByEmail(email);
+        Collection<Registrierung> registrierungen = registrierungsController.findByEmail(email);
         if (registrierungen.isEmpty()) {
             throw new NoSuchElementException("Keine Registrierung gefunden mit der Email " + email);
         }
