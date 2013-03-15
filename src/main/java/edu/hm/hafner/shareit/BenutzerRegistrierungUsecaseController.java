@@ -1,23 +1,23 @@
 package edu.hm.hafner.shareit;
 
 import java.util.Collection;
+import java.util.NoSuchElementException;
 
 import edu.hm.hafner.shareit.model.Registrierung;
 
 /**
- * Usecase Controller für den Anwendungsfall "Benutzer registrieren".
+ * Usecase Controller fÃ¼r den Anwendungsfall "Benutzer registrieren".
  *
  * @author Ulli Hafner
  */
 public interface BenutzerRegistrierungUsecaseController {
-    
     /**
-     * Liefert alle bestehenden Registrierungen zurück.
+     * Liefert alle bestehenden Registrierungen zurÃ¼ck.
      *
      * @return die Registrierungen
      */
-    Collection<Registrierung> getRegistrierungen();
-    
+    Collection<Registrierung> findeAlleRegistrierungen();
+
     /**
      * Registriert einen neuen Benutzer.
      *
@@ -30,7 +30,17 @@ public interface BenutzerRegistrierungUsecaseController {
      * @param passwort
      *            Passwort des Benutzers
      * @return der erzeugte Benutzer
+     * @throws IllegalStateException falls der Benutzername schon vergeben wurde
      */
     Registrierung registriereBenutzer(String vorname, String nachname, String email, String passwort);
-    
+
+    /**
+     * Findet die Registrierung mit der Ã¼bergebenen EMail.
+     *
+     * @param email
+     *            die zu suchende EMail
+     * @return die gefundene Registrierung
+     * @throws NoSuchElementException falls keine Registrierung mit dem Benutzername gefunden wurde
+     */
+    Registrierung findeRegistrierung(String email);
 }

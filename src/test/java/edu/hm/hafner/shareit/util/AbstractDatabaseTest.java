@@ -3,11 +3,12 @@ package edu.hm.hafner.shareit.util;
 import org.junit.Before;
 
 /**
- * Basisklasse für Tests die die Datenbank zurücksetzen müssen.
+ * Basisklasse fÃ¼r Tests die die Datenbank zurÃ¼cksetzen mÃ¼ssen.
  */
+@SuppressWarnings ("PMD.AbstractClassWithoutAbstractMethod")
 public abstract class AbstractDatabaseTest {
     /**
-     * Setzt die Datenbank zurück.
+     * Setzt die Datenbank zurÃ¼ck.
      */
     @Before
     public void clearDatabase() {

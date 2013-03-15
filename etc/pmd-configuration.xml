@@ -6,9 +6,10 @@
   xsi:noNamespaceSchemaLocation="http://pmd.sf.net/ruleset_xml_schema.xsd">
 
   <description>
-    Ulli's PMD rules.
+    Ullrich Hafner's PMD rules.
   </description>
 
+  <exclude-pattern>.*/R.java</exclude-pattern>
   <rule ref="rulesets/basic.xml">
     <exclude name="EmptyCatchBlock"/>
   </rule>
@@ -29,7 +30,8 @@
     </properties>
   </rule>
   <rule ref="rulesets/controversial.xml">
-    <exclude name="AvoidUsingVolatile"/>
+    <exclude name="UseConcurrentHashMap"/>
+    <exclude name="AvoidLiteralsInIfCondition"/>
     <exclude name="AtLeastOneConstructor"/>
     <exclude name="DataflowAnomalyAnalysis"/>
     <exclude name="OnlyOneReturn"/>
@@ -40,7 +42,7 @@
   <rule ref="rulesets/design.xml">
     <exclude name="EmptyMethodInAbstractClassShouldBeAbstract"/>
     <exclude name="UseSingleton"/>
-    <exclude name="AbstractClassWithoutAbstractMethod"/>
+    <exclude name="CloseResource"/>
     <exclude name="CloseResource"/>
   </rule>
   <rule ref="rulesets/finalizers.xml"/>
@@ -61,11 +63,13 @@
   </rule>
   <rule ref="rulesets/optimizations.xml">
     <exclude name="LocalVariableCouldBeFinal"/>
-    <exclude name="AvoidInstantiatingObjectsInLoops"/>
     <exclude name="SimplifyStartsWith"/>
+    <exclude name="AvoidInstantiatingObjectsInLoops"/>
     <exclude name="UseStringBufferForStringAppends"/>
   </rule>
-  <rule ref="rulesets/strictexception.xml"/>
+  <rule ref="rulesets/strictexception.xml">
+    <exclude name="AvoidCatchingGenericException"/>
+  </rule>
   <rule ref="rulesets/strings.xml">
     <exclude name="AvoidDuplicateLiterals"/>
   </rule>

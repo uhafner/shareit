@@ -8,9 +8,11 @@ import com.mongodb.Mongo;
 import de.flapdoodle.embed.mongo.tests.MongodForTestsFactory;
 
 /**
- * Stellt eine NoSQL Datenbank (Mongo DB) zur Verfügung, die nach dem Beenden
- * der Anwendung wieder zerstört wird. Daher wird diese Datenbank am besten nur
- * in Unit-und Integrationstests genutzt.
+ * Stellt eine NoSQL Datenbank (Mongo DB) zur VerfÃ¼gung, die nach dem Beenden der Anwendung wieder zerstÃ¶rt wird. Daher
+ * wird diese Datenbank am besten nur in Unit-und Integrationstests genutzt.
+ * <p>
+ * Achtung: Die Datenbank funktioniert nicht unter Windows XP, eine neuere Windows Version ist erforderlich.
+ * </p>
  *
  * @see <a href="http://www.mongodb.org">Mongo DB</a>
  * @author Ulli Hafner
@@ -18,9 +20,9 @@ import de.flapdoodle.embed.mongo.tests.MongodForTestsFactory;
 public final class DatabaseFactory {
     /** Singleton zum Zugriff auf die Datenbank. */
     public static final DatabaseFactory INSTANCE = new DatabaseFactory();
-    
+
     private DB db;
-    
+
     private DatabaseFactory() {
         try {
             MongodForTestsFactory factory = new MongodForTestsFactory();
@@ -31,9 +33,9 @@ public final class DatabaseFactory {
             throw new IllegalStateException(exception);
         }
     }
-    
+
     /**
-     * Liefert die Datenbank zurück.
+     * Liefert die Datenbank zurÃ¼ck.
      *
      * @return die Datenbank
      * @see #reset() um die Datenbank zu leeren
@@ -41,12 +43,11 @@ public final class DatabaseFactory {
     public DB getDatabase() {
         return db;
     }
-    
+
     /**
-     * Setzt die Datenbank wieder in den Ausgangszustand zurück.
+     * Setzt die Datenbank wieder in den Ausgangszustand zurÃ¼ck.
      */
     public void reset() {
         db.dropDatabase();
     }
 }
-

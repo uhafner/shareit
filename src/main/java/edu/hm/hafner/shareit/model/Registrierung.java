@@ -1,8 +1,8 @@
 package edu.hm.hafner.shareit.model;
 
 /**
- * Enthält alle relevanten Daten für einen neuen Benutzer von ShareIt. Ein
- * Benutzer kann im System eindeutig über seine EMail identifiziert werden.
+ * EnthÃ¤lt alle relevanten Daten fÃ¼r einen neuen Benutzer von ShareIt. Ein Benutzer kann im System eindeutig Ã¼ber seine
+ * EMail identifiziert werden, diese Email wird gleichzeitig als Benutzername verwendet.
  *
  * @author Ulli Hafner
  */
@@ -11,7 +11,7 @@ public class Registrierung {
     private final String vorname;
     private final String email;
     private final String passwort;
-    
+
     /**
      * Erzeugt eine neue {@link Registrierung}.
      *
@@ -30,36 +30,36 @@ public class Registrierung {
         this.email = email;
         this.passwort = passwort;
     }
-    
+
     /**
-     * Liefert den Nachnamen zurück.
+     * Liefert den Nachnamen zurÃ¼ck.
      *
      * @return der Nachname
      */
     public String getNachname() {
         return nachname;
     }
-    
+
     /**
-     * Liefert den Vornamen zurück.
+     * Liefert den Vornamen zurÃ¼ck.
      *
      * @return der Vorname
      */
     public String getVorname() {
         return vorname;
     }
-    
+
     /**
-     * Liefert die EMail zurück.
+     * Liefert die EMail zurÃ¼ck.
      *
      * @return die EMail
      */
     public String getEmail() {
         return email;
     }
-    
+
     /**
-     * Liefert das Passwort zurück.
+     * Liefert das Passwort zurÃ¼ck.
      *
      * @return das Passwort
      */
@@ -67,4 +67,3 @@ public class Registrierung {
         return passwort;
     }
 }
-

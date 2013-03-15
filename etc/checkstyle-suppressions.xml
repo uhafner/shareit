@@ -8,4 +8,5 @@
     <suppress checks="MultipleStringLiterals|MagicNumber|.*Coupling" files=".*Test.java"/>
     <suppress checks=".*" files=".*jdepend/framework/.*"/>
     <suppress checks=".*" files=".*/R.java"/>
+    <suppress checks=".*" files=".*/BuildConfig.java"/>
 </suppressions>

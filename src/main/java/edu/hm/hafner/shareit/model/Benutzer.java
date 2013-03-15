@@ -1,8 +1,7 @@
 package edu.hm.hafner.shareit.model;
 
-
 /**
- * Kann Bücher ausleihen und verleihen.
+ * Kann BÃ¼cher ausleihen und verleihen.
  *
  * @author Ulli Hafner
  */
@@ -22,9 +21,9 @@ public class Benutzer extends Registrierung {
     public Benutzer(final String nachname, final String vorname, final String email, final String passwort) {
         super(nachname, vorname, email, passwort);
     }
-    
+
     /**
-     * Liefert zurück, ob dieser Nutzer erweiterte Rechte besitzt.
+     * Liefert zurÃ¼ck, ob dieser Nutzer erweiterte Rechte besitzt.
      *
      * @return <code>true</code> falls er erweiterte Rechte besitzt,
      *         <code>false</code> otherwise

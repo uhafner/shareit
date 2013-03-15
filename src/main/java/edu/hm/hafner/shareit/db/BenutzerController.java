@@ -5,13 +5,13 @@ import java.util.Collection;
 import edu.hm.hafner.shareit.model.Benutzer;
 
 /**
- * Erzeugt, findet und ändert Registrierungen.
+ * Erzeugt, findet und Ã¤ndert Registrierungen.
  *
  * @author Ulli Hafner
  */
 public interface BenutzerController {
     /**
-     * Liefert alle Benutzer mit der übergebenen EMail zurück.
+     * Liefert alle Benutzer mit der Ã¼bergebenen EMail zurÃ¼ck.
      *
      * @param email
      *            die EMail Addresse

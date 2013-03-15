@@ -5,7 +5,7 @@ import java.util.Collection;
 import edu.hm.hafner.shareit.model.Registrierung;
 
 /**
- * Erzeugt, findet und ändert Registrierungen.
+ * Erzeugt, findet und Ã¤ndert Registrierungen.
  *
  * @author Ulli Hafner
  */
@@ -24,39 +24,38 @@ public interface RegistrierungsController {
      * @return die neue Registrierung
      */
     Registrierung create(String vorname, String nachname, String email, String passwort);
-    
+
     /**
-     * Liefert alle Registrierungen zurück.
+     * Liefert alle Registrierungen zurÃ¼ck.
      *
      * @return die gefundenen Registrierungen
      */
     Collection<Registrierung> findRegistrierungen();
-    
+
     /**
-     * Liefert alle Registrierungen mit der übergebenen EMail zurück.
+     * Liefert alle Registrierungen mit der Ã¼bergebenen EMail zurÃ¼ck.
      *
      * @param email
-     *            die zu prüfende EMail
+     *            die zu prÃ¼fende EMail
      * @return die gefundenen Registrierungen
      */
     Collection<Registrierung> findByEmail(String email);
-    
+
     /**
-     * Löscht die Registrierung zur gegebenen Email aus der Datenbank.
+     * LÃ¶scht die Registrierung zur gegebenen Email aus der Datenbank.
      *
      * @param email
-     *            die Email der zu löschenden Registrierung
+     *            die Email der zu lÃ¶schenden Registrierung
      */
     void delete(String email);
-    
+
     /**
-     * Ändert den Vornamen aller Registrierungen, die die angegebene Email
-     * haben.
+     * Ã„ndert die Eigenschaften der Registrierung mit der angegebenen Email.
      *
      * @param email
-     *            die Email der Datensatze, der geändert werden sollen
+     *            die Email der Registrierung, der geÃ¤ndert werden soll
      * @param geaenderterVorname
      *            der neue Vorname
      */
-    void setVorname(String email, String geaenderterVorname);
+    void updateProperties(String email, String geaenderterVorname);
 }
