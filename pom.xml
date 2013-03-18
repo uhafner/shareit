@@ -38,7 +38,6 @@
     <!-- Project Dependencies Configuration -->
     <findbugs.annotations>2.0.0</findbugs.annotations>
     <guava.version>13.0.1</guava.version>
-    <commons-lang.version>3.1</commons-lang.version>
     <mongo.db.driver.version>2.9.3</mongo.db.driver.version>
     <mongo.db.embedded.version>1.27</mongo.db.embedded.version>
     <junit.version>4.11</junit.version>
@@ -65,11 +64,6 @@
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
       <version>${guava.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-lang3</artifactId>
-      <version>${commons-lang.version}</version>
     </dependency>
     <dependency>
       <groupId>org.mongodb</groupId>
