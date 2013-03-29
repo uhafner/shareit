@@ -23,27 +23,20 @@ public class RegistrierungsControllerImplTest extends AbstractDatabaseTest {
      */
     @Test
     public void testeAnlegen() {
+        // Given
         RegistrierungsController controller = new RegistrierungsControllerImpl();
-
         ueberpruefeAnzahlRegistrierungen(controller, 0);
 
+        // When
         controller.create(TEST_EMAIL, TEST_VORNAME, TEST_NACHNAME, TEST_PASSWORT);
 
+        // Then
         ueberpruefeAnzahlRegistrierungen(controller, 1);
         ueberpruefeInhaltTestRegistrierung(controller);
-
-        String email = "Neue Email";
-        String vorname = "Neuer Vorname";
-        String nachname = "Neuer Nachname";
-        String passwort = "Neues Passwort";
-        controller.create(email, vorname, nachname, passwort);
-
-        ueberpruefeAnzahlRegistrierungen(controller, 2);
-        ueberpruefeInhaltRegistrierung(controller, email, vorname, nachname, passwort);
     }
 
     private void ueberpruefeAnzahlRegistrierungen(final RegistrierungsController controller, final int expectedNumber) {
-        assertEquals("Falsche Anzahl registierte Benutzer", expectedNumber, controller.findRegistrierungen().size());
+        assertEquals("Falsche Anzahl registierte Benutzer:", expectedNumber, controller.findRegistrierungen().size());
     }
 
     private void ueberpruefeInhaltTestRegistrierung(final RegistrierungsController controller) {
@@ -54,12 +47,33 @@ public class RegistrierungsControllerImplTest extends AbstractDatabaseTest {
             final String expectedVorname, final String expectedNachname, final String expectedPasswort) {
         Registrierung benutzer = controller.findByPrimaryKey(email);
 
-        assertEquals("Falsche Email", email, benutzer.getEmail());
-        assertEquals("Falscher Vorname", expectedVorname, benutzer.getVorname());
-        assertEquals("Falscher Nachname", expectedNachname, benutzer.getNachname());
-        assertEquals("Falsches Passwort", expectedPasswort, benutzer.getPasswort());
+        assertEquals("Falsche Email:", email, benutzer.getEmail());
+        assertEquals("Falscher Vorname:", expectedVorname, benutzer.getVorname());
+        assertEquals("Falscher Nachname:", expectedNachname, benutzer.getNachname());
+        assertEquals("Falsches Passwort:", expectedPasswort, benutzer.getPasswort());
     }
 
+    /**
+     * Zeigt, dass mehrere neue Benutzer erfolgreich angelegt werden können.
+     */
+    @Test
+    public void testeAnlegen2Personen() {
+        // Given
+        RegistrierungsController controller = new RegistrierungsControllerImpl();
+
+        pruefeAnlegenRegistrierung(controller, TEST_EMAIL, TEST_VORNAME, TEST_NACHNAME, TEST_PASSWORT, 1);
+        pruefeAnlegenRegistrierung(controller, "Neue Email", "Neuer Vorname", "Neuer Nachname", "Neues Passwort", 2);
+    }
+
+    private void pruefeAnlegenRegistrierung(final RegistrierungsController controller, final String email, final String vorname,
+            final String nachname, final String passwort, final int expectedNumber) {
+        // When
+        controller.create(email, vorname, nachname, passwort);
+
+        // Then
+        ueberpruefeAnzahlRegistrierungen(controller, expectedNumber);
+        ueberpruefeInhaltRegistrierung(controller, email, vorname, nachname, passwort);
+    }
     /**
      * Zeigt, dass eine Exception geworfen wird, falls zweimal die gleiche Email verwendet wird.
      */
