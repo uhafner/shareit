@@ -10,7 +10,7 @@ import edu.hm.hafner.shareit.model.Benutzer;
 import edu.hm.hafner.shareit.model.Registrierung;
 
 /**
- * Usecase Controller für den Anwendungsfall "Benutzer registrieren".
+ * Implementierung des Usecase Controllers für die Komponente Benutzerverwaltung.
  *
  * @author Ulli Hafner
  */
