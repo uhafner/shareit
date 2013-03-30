@@ -97,5 +97,39 @@ public class BenutzerRegistrierungUsecaseControllerImplTest extends AbstractData
         verwaltung.findeRegistrierung(createBenutzer(), "eine@email");
     }
 
+    /**
+     * Zeigt, dass eine Registrierung auch wieder gelöscht werden kann.
+     */
+    @Test
+    public void testeLoeschenEinerRegistrierung() {
+        BenutzerRegistrierungUsecaseController verwaltung = new BenutzerRegistrierungUsecaseControllerImpl();
+
+        verwaltung.registriereBenutzer(TEST_EMAIL, TEST_VORNAME, TEST_NACHNAME, TEST_PASSWORT);
+        pruefeErwarteteAnzahlRegistrierungen(verwaltung, 1);
+        pruefeInhaltRegistrierung(verwaltung);
+
+        verwaltung.loescheRegistrierung(createAdmin(), TEST_EMAIL);
+        pruefeErwarteteAnzahlRegistrierungen(verwaltung, 0);
+    }
+
+    /**
+     * Zeigt, dass ein normaler Nutzer nicht Registrierungen löschen kann.
+     */
+    @Test(expected = SecurityException.class)
+    public void testeAutorisierungLoeschen() {
+        BenutzerRegistrierungUsecaseController verwaltung = new BenutzerRegistrierungUsecaseControllerImpl();
+
+        verwaltung.loescheRegistrierung(createBenutzer(), "eine@email");
+    }
+
+    /**
+     * Zeigt, dass eine Exception geworfen wird, falls es die zu löschende Registrierung nicht gibt.
+     */
+    @Test(expected = NoSuchElementException.class)
+    public void testeEmailBeimLoeschenNichtGefunden() {
+        BenutzerRegistrierungUsecaseController verwaltung = new BenutzerRegistrierungUsecaseControllerImpl();
+
+        verwaltung.loescheRegistrierung(createAdmin(), "gibt.es@nicht");
+    }
 }
 

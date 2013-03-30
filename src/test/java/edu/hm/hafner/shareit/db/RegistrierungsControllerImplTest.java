@@ -74,6 +74,7 @@ public class RegistrierungsControllerImplTest extends AbstractDatabaseTest {
         ueberpruefeAnzahlRegistrierungen(controller, expectedNumber);
         ueberpruefeInhaltRegistrierung(controller, email, vorname, nachname, passwort);
     }
+
     /**
      * Zeigt, dass eine Exception geworfen wird, falls zweimal die gleiche Email verwendet wird.
      */
@@ -83,6 +84,16 @@ public class RegistrierungsControllerImplTest extends AbstractDatabaseTest {
 
         controller.create(TEST_EMAIL, TEST_VORNAME, TEST_NACHNAME, TEST_PASSWORT);
         controller.create(TEST_EMAIL, TEST_VORNAME, TEST_NACHNAME, TEST_PASSWORT);
+    }
+
+    /**
+     * Zeigt, dass eine Exception geworfen wird, falls die zu ändernde Registrierung nicht gefunden wird.
+     */
+    @Test(expected = NoSuchElementException.class)
+    public void testeEmailBeimAendernNichtGefunden() {
+        RegistrierungsController controller = new RegistrierungsControllerImpl();
+
+        controller.updateProperties(TEST_EMAIL, TEST_VORNAME, TEST_NACHNAME, TEST_PASSWORT);
     }
 
     /**
@@ -102,16 +113,6 @@ public class RegistrierungsControllerImplTest extends AbstractDatabaseTest {
         controller.updateProperties(TEST_EMAIL, geaenderterVorname, geaenderterNachname, geaendertesPasswort);
         ueberpruefeAnzahlRegistrierungen(controller, 1);
         ueberpruefeInhaltRegistrierung(controller, TEST_EMAIL, geaenderterVorname, geaenderterNachname, geaendertesPasswort);
-    }
-
-    /**
-     * Zeigt, dass eine Exception geworfen wird, falls die zu ändernde Registrierung nicht gefunden wird.
-     */
-    @Test(expected = NoSuchElementException.class)
-    public void testeEmailBeimAendernNichtGefunden() {
-        RegistrierungsController controller = new RegistrierungsControllerImpl();
-
-        controller.updateProperties(TEST_EMAIL, TEST_VORNAME, TEST_NACHNAME, TEST_PASSWORT);
     }
 
     /**

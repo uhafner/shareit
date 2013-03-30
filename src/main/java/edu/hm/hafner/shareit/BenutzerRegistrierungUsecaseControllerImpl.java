@@ -35,7 +35,7 @@ public class BenutzerRegistrierungUsecaseControllerImpl implements BenutzerRegis
 
     private void ueberpruefeAdministratorRechte(final Benutzer angemeldeterBenutzer) {
         if (!angemeldeterBenutzer.isAdminstrator()) {
-            throw new SecurityException("Die Ausgabe aller Registrierungen darf nur von einem Administrator durchgeführt werden: " + angemeldeterBenutzer);
+            throw new SecurityException("Der Zugriff auf Registrierungen darf nur von einem Administrator durchgeführt werden: " + angemeldeterBenutzer);
         }
     }
 
@@ -44,6 +44,13 @@ public class BenutzerRegistrierungUsecaseControllerImpl implements BenutzerRegis
         ueberpruefeAdministratorRechte(angemeldeterBenutzer);
 
         return registrierungsController.findByPrimaryKey(email);
+    }
+
+    @Override
+    public void loescheRegistrierung(final Benutzer angemeldeterBenutzer, final String email) {
+        ueberpruefeAdministratorRechte(angemeldeterBenutzer);
+
+        registrierungsController.delete(email);
     }
 }
 
