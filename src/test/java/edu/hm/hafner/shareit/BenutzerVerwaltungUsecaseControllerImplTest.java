@@ -11,11 +11,11 @@ import edu.hm.hafner.shareit.model.Registrierung;
 import edu.hm.hafner.shareit.util.AbstractDatabaseTest;
 
 /**
- * Testet die Klasse {@link BenutzerRegistrierungUsecaseControllerImpl}.
+ * Testet die Klasse {@link BenutzerVerwaltungUsecaseControllerImpl}.
  *
  * @author Ulli Hafner
  */
-public class BenutzerRegistrierungUsecaseControllerImplTest extends AbstractDatabaseTest {
+public class BenutzerVerwaltungUsecaseControllerImplTest extends AbstractDatabaseTest {
     private static final String TEST_PASSWORT = "geheim";
     private static final String TEST_EMAIL = "hafner@hm.edu";
     private static final String TEST_NACHNAME = "Hafner";
@@ -26,7 +26,7 @@ public class BenutzerRegistrierungUsecaseControllerImplTest extends AbstractData
      */
     @Test
     public void testeAnlegenEinerRegistrierung() {
-        BenutzerRegistrierungUsecaseController verwaltung = new BenutzerRegistrierungUsecaseControllerImpl();
+        BenutzerVerwaltungUsecaseController verwaltung = new BenutzerVerwaltungUsecaseControllerImpl();
         pruefeErwarteteAnzahlRegistrierungen(verwaltung, 0);
 
         verwaltung.registriereBenutzer(TEST_EMAIL, TEST_VORNAME, TEST_NACHNAME, TEST_PASSWORT);
@@ -34,7 +34,7 @@ public class BenutzerRegistrierungUsecaseControllerImplTest extends AbstractData
         pruefeInhaltRegistrierung(verwaltung);
     }
 
-    private void pruefeInhaltRegistrierung(final BenutzerRegistrierungUsecaseController verwaltung) {
+    private void pruefeInhaltRegistrierung(final BenutzerVerwaltungUsecaseController verwaltung) {
         Registrierung benutzer = verwaltung.findeRegistrierung(createAdmin(), TEST_EMAIL);
 
         assertEquals("Falscher Vorname", TEST_VORNAME, benutzer.getVorname());
@@ -51,7 +51,7 @@ public class BenutzerRegistrierungUsecaseControllerImplTest extends AbstractData
         return new Benutzer(TEST_EMAIL, TEST_VORNAME, TEST_NACHNAME, TEST_PASSWORT, false);
     }
 
-    private void pruefeErwarteteAnzahlRegistrierungen(final BenutzerRegistrierungUsecaseController verwaltung, final int expectedNumber) {
+    private void pruefeErwarteteAnzahlRegistrierungen(final BenutzerVerwaltungUsecaseController verwaltung, final int expectedNumber) {
         assertEquals("Falsche Anzahl registierte Benutzer", expectedNumber, verwaltung.findeAlleRegistrierungen(createAdmin()).size());
     }
 
@@ -60,7 +60,7 @@ public class BenutzerRegistrierungUsecaseControllerImplTest extends AbstractData
      */
     @Test(expected = IllegalStateException.class)
     public void testeDoppeltenBenutzernamen() {
-        BenutzerRegistrierungUsecaseController verwaltung = new BenutzerRegistrierungUsecaseControllerImpl();
+        BenutzerVerwaltungUsecaseController verwaltung = new BenutzerVerwaltungUsecaseControllerImpl();
 
         verwaltung.registriereBenutzer(TEST_EMAIL, TEST_VORNAME, TEST_NACHNAME, TEST_PASSWORT);
         String gleicheEmail = TEST_EMAIL;
@@ -72,7 +72,7 @@ public class BenutzerRegistrierungUsecaseControllerImplTest extends AbstractData
      */
     @Test(expected = NoSuchElementException.class)
     public void testeEmailNichtGefunden() {
-        BenutzerRegistrierungUsecaseController verwaltung = new BenutzerRegistrierungUsecaseControllerImpl();
+        BenutzerVerwaltungUsecaseController verwaltung = new BenutzerVerwaltungUsecaseControllerImpl();
 
         verwaltung.findeRegistrierung(createAdmin(), "unbekannte@email");
     }
@@ -82,7 +82,7 @@ public class BenutzerRegistrierungUsecaseControllerImplTest extends AbstractData
      */
     @Test(expected = SecurityException.class)
     public void testeAutorisierungAlleRegistrierungen() {
-        BenutzerRegistrierungUsecaseController verwaltung = new BenutzerRegistrierungUsecaseControllerImpl();
+        BenutzerVerwaltungUsecaseController verwaltung = new BenutzerVerwaltungUsecaseControllerImpl();
 
         verwaltung.findeAlleRegistrierungen(createBenutzer());
     }
@@ -92,7 +92,7 @@ public class BenutzerRegistrierungUsecaseControllerImplTest extends AbstractData
      */
     @Test(expected = SecurityException.class)
     public void testeAutorisierungSpezifischeRegistrierung() {
-        BenutzerRegistrierungUsecaseController verwaltung = new BenutzerRegistrierungUsecaseControllerImpl();
+        BenutzerVerwaltungUsecaseController verwaltung = new BenutzerVerwaltungUsecaseControllerImpl();
 
         verwaltung.findeRegistrierung(createBenutzer(), "eine@email");
     }
@@ -102,7 +102,7 @@ public class BenutzerRegistrierungUsecaseControllerImplTest extends AbstractData
      */
     @Test
     public void testeLoeschenEinerRegistrierung() {
-        BenutzerRegistrierungUsecaseController verwaltung = new BenutzerRegistrierungUsecaseControllerImpl();
+        BenutzerVerwaltungUsecaseController verwaltung = new BenutzerVerwaltungUsecaseControllerImpl();
 
         verwaltung.registriereBenutzer(TEST_EMAIL, TEST_VORNAME, TEST_NACHNAME, TEST_PASSWORT);
         pruefeErwarteteAnzahlRegistrierungen(verwaltung, 1);
@@ -117,7 +117,7 @@ public class BenutzerRegistrierungUsecaseControllerImplTest extends AbstractData
      */
     @Test(expected = SecurityException.class)
     public void testeAutorisierungLoeschen() {
-        BenutzerRegistrierungUsecaseController verwaltung = new BenutzerRegistrierungUsecaseControllerImpl();
+        BenutzerVerwaltungUsecaseController verwaltung = new BenutzerVerwaltungUsecaseControllerImpl();
 
         verwaltung.loescheRegistrierung(createBenutzer(), "eine@email");
     }
@@ -127,7 +127,7 @@ public class BenutzerRegistrierungUsecaseControllerImplTest extends AbstractData
      */
     @Test(expected = NoSuchElementException.class)
     public void testeEmailBeimLoeschenNichtGefunden() {
-        BenutzerRegistrierungUsecaseController verwaltung = new BenutzerRegistrierungUsecaseControllerImpl();
+        BenutzerVerwaltungUsecaseController verwaltung = new BenutzerVerwaltungUsecaseControllerImpl();
 
         verwaltung.loescheRegistrierung(createAdmin(), "gibt.es@nicht");
     }

@@ -11,7 +11,7 @@ import edu.hm.hafner.shareit.model.Registrierung;
  *
  * @author Ulli Hafner
  */
-public interface BenutzerRegistrierungUsecaseController {
+public interface BenutzerVerwaltungUsecaseController {
     /**
      * Registriert einen neuen Benutzer.
      *

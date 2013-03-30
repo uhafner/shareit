@@ -14,7 +14,7 @@ import edu.hm.hafner.shareit.model.Registrierung;
  *
  * @author Ulli Hafner
  */
-public class BenutzerRegistrierungUsecaseControllerImpl implements BenutzerRegistrierungUsecaseController {
+public class BenutzerVerwaltungUsecaseControllerImpl implements BenutzerVerwaltungUsecaseController {
     private final RegistrierungsController registrierungsController = new RegistrierungsControllerImpl();
     private final BenutzerController benutzerController = new BenutzerControllerImpl();
 
