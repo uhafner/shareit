@@ -15,11 +15,33 @@ import edu.hm.hafner.shareit.model.Registrierung;
  * @author Ulli Hafner
  */
 public class BenutzerVerwaltungUsecaseControllerImpl implements BenutzerVerwaltungUsecaseController {
-    private final RegistrierungsController registrierungsController = new RegistrierungsControllerImpl();
-    private final BenutzerController benutzerController = new BenutzerControllerImpl();
+    private RegistrierungsController registrierungsController = new RegistrierungsControllerImpl();
+    private BenutzerController benutzerController = new BenutzerControllerImpl();
+
+    /**
+     * Creates a new instance of {@link BenutzerVerwaltungUsecaseControllerImpl}.
+     */
+    public BenutzerVerwaltungUsecaseControllerImpl() {
+        this(new RegistrierungsControllerImpl(), new BenutzerControllerImpl());
+    }
+
+    /**
+     * Creates a new instance of {@link BenutzerVerwaltungUsecaseControllerImpl}.
+     *
+     * @param registrierungsController
+     *            controller für Registrierungen
+     * @param benutzerController
+     *            controller für Benutzer
+     */
+    public BenutzerVerwaltungUsecaseControllerImpl(final RegistrierungsController registrierungsController,
+            final BenutzerController benutzerController) {
+        this.registrierungsController = registrierungsController;
+        this.benutzerController = benutzerController;
+    }
 
     @Override
-    public Registrierung registriereBenutzer(final String email, final String vorname, final String nachname, final String passwort) {
+    public Registrierung registriereBenutzer(final String email, final String vorname, final String nachname,
+            final String passwort) {
         if (registrierungsController.containsEmail(email) || benutzerController.containsEmail(email)) {
             throw new IllegalStateException("Die Email ist schon verwendet " + email);
         }
@@ -35,7 +57,8 @@ public class BenutzerVerwaltungUsecaseControllerImpl implements BenutzerVerwaltu
 
     private void ueberpruefeAdministratorRechte(final Benutzer angemeldeterBenutzer) {
         if (!angemeldeterBenutzer.isAdminstrator()) {
-            throw new SecurityException("Der Zugriff auf Registrierungen darf nur von einem Administrator durchgeführt werden: " + angemeldeterBenutzer);
+            throw new SecurityException(
+                    "Der Zugriff auf Registrierungen darf nur von einem Administrator durchgeführt werden: " + angemeldeterBenutzer);
         }
     }
 
@@ -53,4 +76,3 @@ public class BenutzerVerwaltungUsecaseControllerImpl implements BenutzerVerwaltu
         registrierungsController.delete(email);
     }
 }
-
