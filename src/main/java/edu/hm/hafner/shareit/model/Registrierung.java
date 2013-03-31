@@ -25,9 +25,9 @@ public class Registrierung {
      *            Passwort des Benutzers
      */
     public Registrierung(final String email, final String vorname, final String nachname, final String passwort) {
+        this.email = email;
         this.vorname = vorname;
         this.nachname = nachname;
-        this.email = email;
         this.passwort = passwort;
     }
 
