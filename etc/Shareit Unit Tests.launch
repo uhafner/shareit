@@ -2,7 +2,6 @@
 <launchConfiguration type="org.eclipse.jdt.junit.launchconfig">
 <listAttribute key="com.mountainminds.eclemma.core.SCOPE_IDS">
 <listEntry value="=shareit/src\/main\/java"/>
-<listEntry value="=shareit/etc"/>
 </listAttribute>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
 <listEntry value="/shareit"/>
