@@ -1,7 +1,7 @@
 package edu.hm.hafner.shareit.db;
 
 /**
- * Erzeugt, findet und ändert Registrierungen.
+ * Erzeugt, findet und ändert Benutzer.
  *
  * @author Ulli Hafner
  */
