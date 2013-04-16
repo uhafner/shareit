@@ -65,6 +65,11 @@ public class BenutzerVerwaltungMockTest {
         public boolean containsEmail(final String email) {
             return false;
         }
+
+        @Override
+        public Collection<Registrierung> findByText(final String text) {
+            return null;
+        }
     }
 
     /**

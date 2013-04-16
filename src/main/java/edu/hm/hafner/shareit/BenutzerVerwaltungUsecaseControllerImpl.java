@@ -75,4 +75,70 @@ public class BenutzerVerwaltungUsecaseControllerImpl implements BenutzerVerwaltu
 
         registrierungsController.delete(email);
     }
+
+    @Override
+    public Benutzer erzeugeNutzer(final Benutzer angemeldeterBenutzer, final Registrierung freizugebenderBenutzer) {
+        // FIXME Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Collection<Benutzer> findeAlleBenutzer(final Benutzer angemeldeterBenutzer) {
+        // FIXME Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Collection<Benutzer> findeAlleAdministratoren(final Benutzer angemeldeterBenutzer) {
+        // FIXME Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Benutzer findeBenutzer(final Benutzer angemeldeterBenutzer, final String email) {
+        // FIXME Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Collection<Benutzer> sucheBenutzer(final Benutzer angemeldeterBenutzer, final String text) {
+        // FIXME Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Collection<Benutzer> sucheBenutzer(final Benutzer angemeldeterBenutzer, final String text, final boolean isAdministrator) {
+        // FIXME Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void setzteAdministratorRechte(final Benutzer angemeldeterBenutzer, final String email) {
+        // FIXME Auto-generated method stub
+    }
+
+    @Override
+    public void entferneAdministratorRechte(final Benutzer angemeldeterBenutzer, final String email) {
+        // FIXME Auto-generated method stub
+    }
+
+    @Override
+    public void aenderePasswort(final Benutzer angemeldeterBenutzer, final String altesPasswort, final String neuesPasswort) {
+        // FIXME Auto-generated method stub
+    }
+
+    @Override
+    public void sperreBenutzer(final Benutzer angemeldeterBenutzer, final String email) {
+        // FIXME Auto-generated method stub
+    }
+
+    @Override
+    public void entsperreBenutzer(final Benutzer angemeldeterBenutzer, final String email) {
+        // FIXME Auto-generated method stub
+    }
+
+    @Override
+    public void aendereDaten(final Benutzer angemeldeterBenutzer, final String neuerVorname, final String neuerNachname) {
+        // FIXME Auto-generated method stub
+    }
 }
