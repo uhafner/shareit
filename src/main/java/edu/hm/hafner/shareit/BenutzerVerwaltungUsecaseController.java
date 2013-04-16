@@ -74,8 +74,8 @@ public interface BenutzerVerwaltungUsecaseController {
      *
      * @param angemeldeterBenutzer
      *            der angemeldete Benutzer
-     * @param freizugebenderBenutzer
-     *            der freizugebende Benutzer
+     * @param neueRegistrierung
+     *            die neue Registrierung
      * @return der erzeugte Benutzer
      * @throws IllegalStateException
      *             falls der Benutzername schon vergeben wurde
@@ -86,7 +86,7 @@ public interface BenutzerVerwaltungUsecaseController {
      * @throws IllegalArgumentException
      *             falls der Benutzername leer ist
      */
-    Benutzer erzeugeNutzer(Benutzer angemeldeterBenutzer, Registrierung freizugebenderBenutzer);
+    Benutzer erzeugeNutzer(Benutzer angemeldeterBenutzer, Registrierung neueRegistrierung);
 
     /**
      * Liefert alle bestehenden Benutzer zurück.
@@ -100,15 +100,17 @@ public interface BenutzerVerwaltungUsecaseController {
     Collection<Benutzer> findeAlleBenutzer(Benutzer angemeldeterBenutzer);
 
     /**
-     * Liefert alle bestehenden Administratoren zurück.
+     * Liefert alle bestehenden Benutzer zurück. Sucht entweder nach normalen Benutzern oder nach Administratoren.
      *
      * @param angemeldeterBenutzer
      *            der angemeldete Benutzer
-     * @return die Administratoren
+     * @param isAdministrator
+     *            definiert, ob nach Benutzern oder Administratoren gesucht werden soll
+     * @return die Benutzer
      * @throws SecurityException
      *             falls die Operation von keinem Administrator durchgeführt wird
      */
-    Collection<Benutzer> findeAlleAdministratoren(Benutzer angemeldeterBenutzer);
+    Collection<Benutzer> findeAlleBenutzer(Benutzer angemeldeterBenutzer, boolean isAdministrator);
 
     /**
      * Findet den Benutzer mit der übergebenen EMail.
@@ -132,7 +134,7 @@ public interface BenutzerVerwaltungUsecaseController {
      *            der angemeldete Benutzer
      * @param text
      *            der zu suchende Text
-     * @return der gefundene Benutzer
+     * @return die gefundenen Benutzer
      * @throws SecurityException
      *             falls die Operation von keinem Administrator durchgeführt wird
      */
@@ -147,7 +149,7 @@ public interface BenutzerVerwaltungUsecaseController {
      * @param text
      *            der zu suchende Text
      * @param isAdministrator
-     *            definiert, ob nach Benutzern oder Administratoren gesucht werden soll
+     *            definiert, ob nach normalen Benutzern oder Administratoren gesucht werden soll
      * @return der gefundene Benutzer
      * @throws SecurityException
      *             falls die Operation von keinem Administrator durchgeführt wird
@@ -187,22 +189,6 @@ public interface BenutzerVerwaltungUsecaseController {
     void entferneAdministratorRechte(Benutzer angemeldeterBenutzer, String email);
 
     /**
-     * Ändert das Passwort.
-     *
-     * @param angemeldeterBenutzer
-     *            der angemeldete Benutzer
-     * @param altesPasswort
-     *            das alte Passwort
-     * @param neuesPasswort
-     *            das neue Passwort
-     * @throws SecurityException
-     *             falls das alte Passwort nicht stimmt
-     * @throws IllegalArgumentException
-     *             falls das neue Passwort nicht sicher genug ist
-     */
-    void aenderePasswort(Benutzer angemeldeterBenutzer, String altesPasswort, String neuesPasswort);
-
-    /**
      * Sperrt den Benutzer mit der angegebenen Email.
      *
      * @param angemeldeterBenutzer
@@ -235,6 +221,22 @@ public interface BenutzerVerwaltungUsecaseController {
     void entsperreBenutzer(Benutzer angemeldeterBenutzer, String email);
 
     /**
+     * Ändert das Passwort.
+     *
+     * @param angemeldeterBenutzer
+     *            der angemeldete Benutzer
+     * @param altesPasswort
+     *            das alte Passwort
+     * @param neuesPasswort
+     *            das neue Passwort
+     * @throws SecurityException
+     *             falls das alte Passwort nicht stimmt
+     * @throws IllegalArgumentException
+     *             falls das neue Passwort nicht sicher genug ist
+     */
+    void aenderePasswort(Benutzer angemeldeterBenutzer, String altesPasswort, String neuesPasswort);
+
+    /**
      * Ändert die eigenen Benutzerdaten.
      *
      * @param angemeldeterBenutzer
@@ -243,6 +245,8 @@ public interface BenutzerVerwaltungUsecaseController {
      *            der neue Vorname
      * @param neuerNachname
      *            der neue Nachname
+     * @throws IllegalArgumentException
+     *             falls Vor- oder Nachname nur aus Whitespace besteht
      */
     void aendereDaten(Benutzer angemeldeterBenutzer, String neuerVorname, String neuerNachname);
 }
