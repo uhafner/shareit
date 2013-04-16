@@ -95,13 +95,13 @@ public class BenutzerVerwaltungUsecaseControllerImpl implements BenutzerVerwaltu
     }
 
     @Override
-    public Collection<Benutzer> sucheBenutzer(final Benutzer angemeldeterBenutzer, final String text) {
+    public Collection<Benutzer> findeAlleBenutzer(final Benutzer angemeldeterBenutzer, final String text) {
         // FIXME Auto-generated method stub
         return null;
     }
 
     @Override
-    public Collection<Benutzer> sucheBenutzer(final Benutzer angemeldeterBenutzer, final String text, final boolean isAdministrator) {
+    public Collection<Benutzer> findeAlleBenutzer(final Benutzer angemeldeterBenutzer, final String text, final boolean isAdministrator) {
         // FIXME Auto-generated method stub
         return null;
     }
@@ -146,5 +146,11 @@ public class BenutzerVerwaltungUsecaseControllerImpl implements BenutzerVerwaltu
     public void loescheBenutzer(final Benutzer angemeldeterBenutzer, final String email) {
         // FIXME Auto-generated method stub
 
+    }
+
+    @Override
+    public Collection<Benutzer> findeAlleGesperrtenBenutzer(final Benutzer angemeldeterBenutzer) {
+        // FIXME Auto-generated method stub
+        return null;
     }
 }

@@ -30,6 +30,20 @@ public interface BenutzerVerwaltungUsecaseController {
     Registrierung registriereBenutzer(String email, String vorname, String nachname, String passwort);
 
     /**
+     * Löscht die Registrierung zur gegebenen Email aus der Datenbank.
+     *
+     * @param angemeldeterBenutzer
+     *            der angemeldete Benutzer
+     * @param email
+     *            die Email der zu löschenden Registrierung
+     * @throws NoSuchElementException
+     *             falls keine Registrierung mit dem Benutzernamen gefunden wurde
+     * @throws SecurityException
+     *             falls die Operation von keinem Administrator durchgeführt wird
+     */
+    void loescheRegistrierung(Benutzer angemeldeterBenutzer, String email);
+
+    /**
      * Liefert alle bestehenden Registrierungen zurück.
      *
      * @param angemeldeterBenutzer
@@ -54,20 +68,6 @@ public interface BenutzerVerwaltungUsecaseController {
      *             falls keine Registrierung mit dem Benutzernamen gefunden wurde
      */
     Registrierung findeRegistrierung(Benutzer angemeldeterBenutzer, String email);
-
-    /**
-     * Löscht die Registrierung zur gegebenen Email aus der Datenbank.
-     *
-     * @param angemeldeterBenutzer
-     *            der angemeldete Benutzer
-     * @param email
-     *            die Email der zu löschenden Registrierung
-     * @throws NoSuchElementException
-     *             falls keine Registrierung mit dem Benutzernamen gefunden wurde
-     * @throws SecurityException
-     *             falls die Operation von keinem Administrator durchgeführt wird
-     */
-    void loescheRegistrierung(Benutzer angemeldeterBenutzer, String email);
 
     /**
      * Erzeugt einen neuen Benutzer auf Basis der übergebenen Registrierung.
@@ -127,22 +127,7 @@ public interface BenutzerVerwaltungUsecaseController {
     Collection<Benutzer> findeAlleBenutzer(Benutzer angemeldeterBenutzer, boolean isAdministrator);
 
     /**
-     * Findet den Benutzer mit der übergebenen EMail.
-     *
-     * @param angemeldeterBenutzer
-     *            der angemeldete Benutzer
-     * @param email
-     *            die zu suchende EMail
-     * @return der gefundene Benutzer
-     * @throws SecurityException
-     *             falls die Operation von keinem Administrator durchgeführt wird
-     * @throws NoSuchElementException
-     *             falls kein Benutzer mit dem Benutzernamen gefunden wurde
-     */
-    Benutzer findeBenutzer(Benutzer angemeldeterBenutzer, String email);
-
-    /**
-     * Suche nach allen Benutzern, die den übergebenen String im Benutzernamen, Namen oder Vornamen enthalten.
+     * Sucht nach allen Benutzern, die den übergebenen String im Benutzernamen, Namen oder Vornamen enthalten.
      *
      * @param angemeldeterBenutzer
      *            der angemeldete Benutzer
@@ -152,10 +137,10 @@ public interface BenutzerVerwaltungUsecaseController {
      * @throws SecurityException
      *             falls die Operation von keinem Administrator durchgeführt wird
      */
-    Collection<Benutzer> sucheBenutzer(Benutzer angemeldeterBenutzer, String text);
+    Collection<Benutzer> findeAlleBenutzer(Benutzer angemeldeterBenutzer, String text);
 
     /**
-     * Suche nach allen Benutzern, die den übergebenen String im Benutzernamen, Namen oder Vornamen enthalten. Sucht
+     * Sucht nach allen Benutzern, die den übergebenen String im Benutzernamen, Namen oder Vornamen enthalten. Sucht
      * entweder nach normalen Benutzern oder nach Administratoren.
      *
      * @param angemeldeterBenutzer
@@ -164,11 +149,11 @@ public interface BenutzerVerwaltungUsecaseController {
      *            der zu suchende Text
      * @param isAdministrator
      *            definiert, ob nach normalen Benutzern oder Administratoren gesucht werden soll
-     * @return der gefundene Benutzer
+     * @return die gefundenen Benutzer
      * @throws SecurityException
      *             falls die Operation von keinem Administrator durchgeführt wird
      */
-    Collection<Benutzer> sucheBenutzer(Benutzer angemeldeterBenutzer, String text, boolean isAdministrator);
+    Collection<Benutzer> findeAlleBenutzer(Benutzer angemeldeterBenutzer, String text, boolean isAdministrator);
 
     /**
      * Macht den Benutzer mit der übergebenen EMail zum Administrator.
@@ -235,6 +220,17 @@ public interface BenutzerVerwaltungUsecaseController {
     void entsperreBenutzer(Benutzer angemeldeterBenutzer, String email);
 
     /**
+     * Sucht nach allen gesperrten Benutzern.
+     *
+     * @param angemeldeterBenutzer
+     *            der angemeldete Benutzer
+     * @return die gefundenen Benutzer
+     * @throws SecurityException
+     *             falls die Operation von keinem Administrator durchgeführt wird
+     */
+    Collection<Benutzer> findeAlleGesperrtenBenutzer(Benutzer angemeldeterBenutzer);
+
+    /**
      * Ändert das Passwort.
      *
      * @param angemeldeterBenutzer
@@ -263,4 +259,19 @@ public interface BenutzerVerwaltungUsecaseController {
      *             falls Vor- oder Nachname nur aus Whitespace besteht
      */
     void aendereDaten(Benutzer angemeldeterBenutzer, String neuerVorname, String neuerNachname);
+
+    /**
+     * Findet den Benutzer mit der übergebenen EMail.
+     *
+     * @param angemeldeterBenutzer
+     *            der angemeldete Benutzer
+     * @param email
+     *            die zu suchende EMail
+     * @return der gefundene Benutzer
+     * @throws SecurityException
+     *             falls die Operation von keinem Administrator durchgeführt wird
+     * @throws NoSuchElementException
+     *             falls kein Benutzer mit dem Benutzernamen gefunden wurde
+     */
+    Benutzer findeBenutzer(Benutzer angemeldeterBenutzer, String email);
 }
