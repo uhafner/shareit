@@ -2,6 +2,7 @@ package edu.hm.hafner.shareit.db;
 
 import static org.junit.Assert.*;
 
+import java.util.Collection;
 import java.util.NoSuchElementException;
 
 import org.junit.Test;
@@ -176,5 +177,33 @@ public class RegistrierungsControllerImplTest extends AbstractDatabaseTest {
         RegistrierungsController controller = new RegistrierungsControllerImpl();
 
         controller.findByPrimaryKey(TEST_EMAIL);
+    }
+
+    /**
+     * Überpüft, dass korrekt nach dem Text gesucht wird in allen Attributen.
+     */
+    @Test
+    public void testeSucheNachText() {
+        // Given
+        RegistrierungsController controller = new RegistrierungsControllerImpl();
+        controller.create("1", "Vorname", "Nachname", "egal");
+        controller.create("2", "Ulli", "Nachname", "egal");
+        controller.create("3", "Ulli", "Hafner", "egal");
+        controller.create("3-name", "Ulli", "Hafner", "egal");
+
+        ueberpruefeAnzahlRegistrierungen(controller, 4);
+
+        ueberpruefeSuche(controller, "Ulli", 3);
+        ueberpruefeSuche(controller, "name", 3);
+        ueberpruefeSuche(controller, "egal", 0);
+        ueberpruefeSuche(controller, "3", 2);
+        ueberpruefeSuche(controller, "[", 0);
+    }
+
+    private void ueberpruefeSuche(final RegistrierungsController controller, final String text, final int expectedElements) {
+        // When
+        Collection<Registrierung> treffer = controller.findByText(text);
+        // Then
+        assertEquals(String.format("Falsche Anzahl Elemente mit '%s' gefunden", text), expectedElements, treffer.size());
     }
 }

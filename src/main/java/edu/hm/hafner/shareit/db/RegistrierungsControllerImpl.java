@@ -1,14 +1,18 @@
 package edu.hm.hafner.shareit.db;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 import com.google.common.collect.Lists;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
+import com.mongodb.QueryBuilder;
 
 import edu.hm.hafner.shareit.model.Registrierung;
 import edu.hm.hafner.shareit.util.DatabaseFactory;
@@ -170,6 +174,34 @@ public class RegistrierungsControllerImpl implements RegistrierungsController {
         }
         finally {
             cursor.close();
+        }
+    }
+
+    /**
+     * Setzt eine Datenbanksuche ab, die alle Objekte findet, die den übergebenen Text enthalten (außer im Passwort).
+     *
+     * @param text
+     *            der zu suchende Text
+     * @return ein Datenbankcursor zum Navigieren über die Menge der gefundenen Registrierungen
+     */
+    private DBCursor queryForText(final String text) {
+        Pattern searchPattern = Pattern.compile(text);
+        DBObject query = QueryBuilder.start().or(
+                QueryBuilder.start(EMAIL_KEY).regex(searchPattern).get(),
+                QueryBuilder.start(VORNAME_KEY).regex(searchPattern).get(),
+                QueryBuilder.start(NACHNAME_KEY).regex(searchPattern).get())
+                .get();
+
+        return getRegistrierungenCollection().find(query);
+    }
+
+    @Override
+    public Collection<Registrierung> findByText(final String text) {
+        try {
+            return asCollection(queryForText(text));
+        }
+        catch (PatternSyntaxException exception) {
+            return Collections.emptyList();
         }
     }
 }
