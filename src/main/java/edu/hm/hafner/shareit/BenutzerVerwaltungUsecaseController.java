@@ -89,6 +89,20 @@ public interface BenutzerVerwaltungUsecaseController {
     Benutzer erzeugeNutzer(Benutzer angemeldeterBenutzer, Registrierung neueRegistrierung);
 
     /**
+     * Löscht den Benutzer zur gegebenen Email aus der Datenbank.
+     *
+     * @param angemeldeterBenutzer
+     *            der angemeldete Benutzer
+     * @param email
+     *            die Email des zu löschenden Benutzers
+     * @throws NoSuchElementException
+     *             falls kein Benutzer mit dem Benutzernamen gefunden wurde
+     * @throws SecurityException
+     *             falls die Operation von keinem Administrator durchgeführt wird
+     */
+    void loescheBenutzer(Benutzer angemeldeterBenutzer, String email);
+
+    /**
      * Liefert alle bestehenden Benutzer zurück.
      *
      * @param angemeldeterBenutzer

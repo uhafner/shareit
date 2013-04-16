@@ -141,4 +141,10 @@ public class BenutzerVerwaltungUsecaseControllerImpl implements BenutzerVerwaltu
         // FIXME Auto-generated method stub
         return null;
     }
+
+    @Override
+    public void loescheBenutzer(final Benutzer angemeldeterBenutzer, final String email) {
+        // FIXME Auto-generated method stub
+
+    }
 }
