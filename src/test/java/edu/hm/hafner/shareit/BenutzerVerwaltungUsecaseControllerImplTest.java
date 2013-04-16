@@ -6,6 +6,7 @@ import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.NoSuchElementException;
 
 import org.junit.Test;
 
@@ -109,6 +110,18 @@ public class BenutzerVerwaltungUsecaseControllerImplTest extends AbstractDatabas
         Registrierung actual = controller.findeRegistrierung(createAdmin(), TEST_EMAIL);
 
         assertSame("Nicht die gleiche Registrierung gefunden", registrierung, actual);
+    }
+
+    /**
+     * Zeigt, dass Exceptions der Datenhaltung durchgereicht werden.
+     */
+    @Test(expected = NoSuchElementException.class)
+    public void testeExceptionBySucheNachPrimaryKey() {
+        RegistrierungsController registrierungsController = mock(RegistrierungsController.class);
+        BenutzerVerwaltungUsecaseController controller = createController(registrierungsController);
+
+        doThrow(new NoSuchElementException()).when(registrierungsController).findByPrimaryKey(anyString());
+        controller.findeRegistrierung(createAdmin(), TEST_EMAIL);
     }
 
     /**
