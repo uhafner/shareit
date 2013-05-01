@@ -21,7 +21,7 @@ public class Benutzer extends Registrierung {
      *            Passwort des Benutzers
      */
     public Benutzer(final String email, final String vorname, final String nachname, final String passwort) {
-        this(email, nachname, vorname, passwort, false);
+        this(email, vorname, nachname, passwort, false);
     }
 
     /**
@@ -40,7 +40,7 @@ public class Benutzer extends Registrierung {
      *
      */
     public Benutzer(final String email, final String vorname, final String nachname, final String passwort, final boolean isAdministrator) {
-        super(email, nachname, vorname, passwort);
+        super(email, vorname, nachname, passwort);
 
         hasAdminRights = isAdministrator;
     }
