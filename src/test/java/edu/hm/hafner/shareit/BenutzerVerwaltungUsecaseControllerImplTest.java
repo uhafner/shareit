@@ -111,9 +111,11 @@ public class BenutzerVerwaltungUsecaseControllerImplTest extends AbstractDatabas
      * {@link RegistrierungsController} erzeugt, der für die Suche nach einer Email genau eine Registrierung
      * zurückliefert. Die zurückgelieferte Registrierung ist auch ein Stub, könnte aber auch alternativ durch ein Dummy
      * Objekt umgesetzt werden. Welche Variante man für die Registrierung nimmt ist egal, beide funktionieren.
+     *
+     * @see #testeFindenEinerDerRegistrierungMock() alternative Implementierung mit einem Mock
      */
     @Test
-    public void testeFindenEinerDerRegistrierung() {
+    public void testeFindenEinerDerRegistrierungStub() {
         RegistrierungsController registrierungsController = mock(RegistrierungsController.class);
         Registrierung registrierung = mock(Registrierung.class);
         when(registrierungsController.findByPrimaryKey(TEST_EMAIL)).thenReturn(registrierung);
@@ -122,6 +124,23 @@ public class BenutzerVerwaltungUsecaseControllerImplTest extends AbstractDatabas
         Registrierung actual = controller.findeRegistrierung(createAdmin(), TEST_EMAIL);
 
         assertSame("Nicht die gleiche Registrierung gefunden", registrierung, actual);
+    }
+
+    /**
+     * Testet, dass die richtige Registrierung gefunden wird. Dazu wird ein Mock für den
+     * {@link RegistrierungsController} erzeugt, an dem hinterher überprüft wird, ob die Methode korrekt aufgerufen
+     * wurde.
+     *
+     * @see #testeFindenEinerDerRegistrierungStub() alternative Implementierung mit einem Stub
+     */
+    @Test
+    public void testeFindenEinerDerRegistrierungMock() {
+        RegistrierungsController registrierungsController = mock(RegistrierungsController.class);
+        BenutzerVerwaltungUsecaseController controller = createController(registrierungsController);
+
+        controller.findeRegistrierung(createAdmin(), TEST_EMAIL);
+
+        verify(registrierungsController).findByPrimaryKey(TEST_EMAIL);
     }
 
     /**
