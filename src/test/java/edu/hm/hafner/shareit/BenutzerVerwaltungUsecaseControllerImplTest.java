@@ -36,7 +36,10 @@ public class BenutzerVerwaltungUsecaseControllerImplTest extends AbstractDatabas
     }
 
     /**
-     * Testet, dass das Löschen der Registrierung an die Datenbank weitergeleitet wird.
+     * Testet, dass das Löschen der Registrierung an die Datenbank weitergeleitet wird. Der Testfall nutzt einen Mock
+     * für den {@link RegistrierungsController}. Als aktueller angemeldeter Benutzer wird ein Dummy erzeugt, da dies der
+     * einfachste Weg ist, einen {@link Benutzer} zu erzeugen. Der {@link BenutzerController} wird gar nicht benötigt und
+     * daher durch einem Stub ersetzt.
      */
     @Test
     public void testeLoeschenDerRegistrierung() {
@@ -53,7 +56,9 @@ public class BenutzerVerwaltungUsecaseControllerImplTest extends AbstractDatabas
     }
 
     /**
-     * Zeigt, dass ein normaler Nutzer nicht Registrierungen löschen kann.
+     * Zeigt, dass ein normaler Nutzer nicht Registrierungen löschen kann. Als aktueller angemeldeter Benutzer wird ein
+     * Dummy erzeugt, da dies der einfachste Weg ist, einen {@link Benutzer} zu erzeugen. Die beiden Controller werden
+     * durch Stubs ersetzt, sie werden nicht weiter genutzt.
      */
     @Test(expected = SecurityException.class)
     public void testeBerechtigungFuerLoeschen() {
@@ -64,7 +69,9 @@ public class BenutzerVerwaltungUsecaseControllerImplTest extends AbstractDatabas
     }
 
     /**
-     * Zeigt, dass ein normaler Nutzer nicht Registrierungen sehen kann.
+     * Zeigt, dass ein normaler Nutzer nicht Registrierungen sehen kann. Als aktueller angemeldeter Benutzer wird ein
+     * Dummy erzeugt, da dies der einfachste Weg ist, einen {@link Benutzer} zu erzeugen. Die beiden Controller werden
+     * durch Stubs ersetzt, sie werden nicht weiter genutzt.
      */
     @Test(expected = SecurityException.class)
     public void testeBerechtigungFuerSuchen() {
@@ -75,7 +82,9 @@ public class BenutzerVerwaltungUsecaseControllerImplTest extends AbstractDatabas
     }
 
     /**
-     * Zeigt, dass ein normaler Nutzer nicht Registrierungen sehen kann.
+     * Zeigt, dass ein normaler Nutzer nicht Registrierungen sehen kann. Als aktueller angemeldeter Benutzer wird ein
+     * Dummy erzeugt, da dies der einfachste Weg ist, einen {@link Benutzer} zu erzeugen. Die beiden Controller werden
+     * durch Stubs ersetzt, sie werden nicht weiter genutzt.
      */
     @Test(expected = SecurityException.class)
     public void testeBerechtigungFuerAlleSuchen() {
