@@ -107,7 +107,10 @@ public class BenutzerVerwaltungUsecaseControllerImplTest extends AbstractDatabas
     }
 
     /**
-     * Testet, dass die richtige Registrierung gefunden wird.
+     * Testet, dass die richtige Registrierung gefunden wird. Dazu wird ein Stub für den
+     * {@link RegistrierungsController} erzeugt, der für die Suche nach einer Email genau eine Registrierung
+     * zurückliefert. Die zurückgelieferte Registrierung ist auch ein Stub, könnte aber auch alternativ durch ein Dummy
+     * Objekt umgesetzt werden. Welche Variante man für die Registrierung nimmt ist egal, beide funktionieren.
      */
     @Test
     public void testeFindenEinerDerRegistrierung() {
