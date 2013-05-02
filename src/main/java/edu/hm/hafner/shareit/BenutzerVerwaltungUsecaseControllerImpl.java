@@ -15,29 +15,8 @@ import edu.hm.hafner.shareit.model.Registrierung;
  * @author Ulli Hafner
  */
 public class BenutzerVerwaltungUsecaseControllerImpl implements BenutzerVerwaltungUsecaseController {
-    private RegistrierungsController registrierungsController = new RegistrierungsControllerImpl();
-    private BenutzerController benutzerController = new BenutzerControllerImpl();
-
-    /**
-     * Creates a new instance of {@link BenutzerVerwaltungUsecaseControllerImpl}.
-     */
-    public BenutzerVerwaltungUsecaseControllerImpl() {
-        this(new RegistrierungsControllerImpl(), new BenutzerControllerImpl());
-    }
-
-    /**
-     * Creates a new instance of {@link BenutzerVerwaltungUsecaseControllerImpl}.
-     *
-     * @param registrierungsController
-     *            controller für Registrierungen
-     * @param benutzerController
-     *            controller für Benutzer
-     */
-    public BenutzerVerwaltungUsecaseControllerImpl(final RegistrierungsController registrierungsController,
-            final BenutzerController benutzerController) {
-        this.registrierungsController = registrierungsController;
-        this.benutzerController = benutzerController;
-    }
+    private final RegistrierungsController registrierungsController = new RegistrierungsControllerImpl();
+    private final BenutzerController benutzerController = new BenutzerControllerImpl();
 
     @Override
     public Registrierung registriereBenutzer(final String email, final String vorname, final String nachname,
