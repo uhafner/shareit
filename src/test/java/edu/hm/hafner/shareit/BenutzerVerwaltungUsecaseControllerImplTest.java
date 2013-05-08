@@ -203,16 +203,13 @@ public class BenutzerVerwaltungUsecaseControllerImplTest extends AbstractDatabas
     }
 
     /**
-     * Überprüft, ob eine Exception geworfen wird, wenn der Benutzername schon vergeben wurde.
+     * Überprüft, ob eine Registrierung korrekt angelegt werden kann.
      */
     @Test
     public void testeAnlegenRegistrierung() {
         // Given
         BenutzerController benutzerController = mock(BenutzerController.class);
-        when(benutzerController.containsEmail("ist.schon@da")).thenReturn(false);
-
         RegistrierungsController registrierungsController = mock(RegistrierungsController.class);
-        when(registrierungsController.containsEmail("ist.schon@da")).thenReturn(false);
 
         Registrierung registrierung = mock(Registrierung.class);
         when(registrierungsController.create(TEST_EMAIL, TEST_VORNAME, TEST_NACHNAME, TEST_PASSWORT)).thenReturn(registrierung);
