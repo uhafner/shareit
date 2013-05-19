@@ -100,16 +100,20 @@ public class RegistrierungsControllerImpl implements RegistrierungsController {
      */
     private Collection<Registrierung> asCollection(final DBCursor result) {
         try {
-            List<Registrierung> registrierungen = Lists.newArrayList();
-            for (DBObject dbObject : result) {
-                Registrierung registrierung = convertToRegistrierung(dbObject);
-                registrierungen.add(registrierung);
-            }
-            return registrierungen;
+            return convertToRegistrierungen(result);
         }
         finally {
             result.close();
         }
+    }
+
+    private Collection<Registrierung> convertToRegistrierungen(final DBCursor result) {
+        List<Registrierung> registrierungen = Lists.newArrayList();
+        for (DBObject dbObject : result) {
+            Registrierung registrierung = convertToRegistrierung(dbObject);
+            registrierungen.add(registrierung);
+        }
+        return registrierungen;
     }
 
     /**
