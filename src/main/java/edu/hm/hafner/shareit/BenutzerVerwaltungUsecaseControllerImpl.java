@@ -8,6 +8,7 @@ import edu.hm.hafner.shareit.db.RegistrierungsController;
 import edu.hm.hafner.shareit.db.RegistrierungsControllerImpl;
 import edu.hm.hafner.shareit.model.Benutzer;
 import edu.hm.hafner.shareit.model.Registrierung;
+import edu.hm.hafner.shareit.util.Ensure;
 
 /**
  * Implementierung des Usecase Controllers für die Komponente Benutzerverwaltung.
@@ -21,9 +22,12 @@ public class BenutzerVerwaltungUsecaseControllerImpl implements BenutzerVerwaltu
     @Override
     public Registrierung registriereBenutzer(final String email, final String vorname, final String nachname,
             final String passwort) {
+        Ensure.that(email, vorname, passwort).isNotNull("Registrierungsdaten müssen gesetzt sein: %s - %s - %s", email, vorname, passwort);
+        Ensure.that(email).isNotBlank("Der Benutzername darf nicht leer bleiben");
         if (registrierungsController.containsEmail(email) || benutzerController.containsEmail(email)) {
-            throw new IllegalStateException("Die Email ist schon verwendet " + email);
+            throw new IllegalStateException("Die Email ist schon verwendet: " + email);
         }
+
         return registrierungsController.create(email, vorname, nachname, passwort);
     }
 
@@ -35,6 +39,7 @@ public class BenutzerVerwaltungUsecaseControllerImpl implements BenutzerVerwaltu
     }
 
     private void ueberpruefeAdministratorRechte(final Benutzer angemeldeterBenutzer) {
+        Ensure.that(angemeldeterBenutzer).isNotNull("Kein Benutzer übergeben");
         if (!angemeldeterBenutzer.isAdminstrator()) {
             throw new SecurityException(
                     "Der Zugriff auf Registrierungen darf nur von einem Administrator durchgeführt werden: " + angemeldeterBenutzer);
