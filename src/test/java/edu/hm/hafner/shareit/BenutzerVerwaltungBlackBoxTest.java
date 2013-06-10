@@ -11,11 +11,12 @@ import edu.hm.hafner.shareit.model.Registrierung;
 import edu.hm.hafner.shareit.util.AbstractDatabaseTest;
 
 /**
- * Testet die Klasse {@link BenutzerVerwaltungUsecaseControllerImpl}.
+ * Testet die Komponente Benutzerverwaltung mittels Black Box Testing. D.h. die Schichten Anwendungslogik und
+ * Datenzugriffsschicht werden gemeinsam getestet.
  *
  * @author Ulli Hafner
  */
-public class BenutzerVerwaltungUsecaseControllerImplTest extends AbstractDatabaseTest {
+public class BenutzerVerwaltungBlackBoxTest extends AbstractDatabaseTest {
     private static final String TEST_PASSWORT = "geheim";
     private static final String TEST_EMAIL = "hafner@hm.edu";
     private static final String TEST_NACHNAME = "Hafner";
@@ -51,8 +52,10 @@ public class BenutzerVerwaltungUsecaseControllerImplTest extends AbstractDatabas
         return new Benutzer(TEST_EMAIL, TEST_VORNAME, TEST_NACHNAME, TEST_PASSWORT, false);
     }
 
-    private void pruefeErwarteteAnzahlRegistrierungen(final BenutzerVerwaltungUsecaseController verwaltung, final int expectedNumber) {
-        assertEquals("Falsche Anzahl registierte Benutzer", expectedNumber, verwaltung.findeAlleRegistrierungen(createAdmin()).size());
+    private void pruefeErwarteteAnzahlRegistrierungen(final BenutzerVerwaltungUsecaseController verwaltung,
+            final int expectedNumber) {
+        assertEquals("Falsche Anzahl registierte Benutzer", expectedNumber,
+                verwaltung.findeAlleRegistrierungen(createAdmin()).size());
     }
 
     /**
@@ -132,4 +135,3 @@ public class BenutzerVerwaltungUsecaseControllerImplTest extends AbstractDatabas
         verwaltung.loescheRegistrierung(createAdmin(), "gibt.es@nicht");
     }
 }
-
