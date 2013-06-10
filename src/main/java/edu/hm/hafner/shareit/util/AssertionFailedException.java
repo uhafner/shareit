@@ -10,7 +10,7 @@ import javax.annotation.CheckForNull;
  *
  * @author Ulli Hafner
  */
-public final class AssertionFailedException extends RuntimeException {
+public final class AssertionFailedException extends IllegalArgumentException {
     private static final long serialVersionUID = -7033759120346380864L;
 
     /**
