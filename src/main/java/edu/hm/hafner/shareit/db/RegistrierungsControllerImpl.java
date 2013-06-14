@@ -85,10 +85,10 @@ public class RegistrierungsControllerImpl implements RegistrierungsController {
      * @return ein Datenbankcursor zum Navigieren über die Menge der gefundenen Registrierungen
      */
     private DBCursor queryForEmail(final String email) {
-        BasicDBObject query = new BasicDBObject();
-        query.append(EMAIL_KEY, email);
+        BasicDBObject example = new BasicDBObject();
+        example.put(EMAIL_KEY, email);
 
-        return getRegistrierungenCollection().find(query);
+        return getRegistrierungenCollection().find(example);
     }
 
     /**
@@ -157,8 +157,8 @@ public class RegistrierungsControllerImpl implements RegistrierungsController {
     }
 
     @Override
-    public void updateProperties(final String email,
-            final String geaenderterVorname, final String geaenderterNachname, final String geaendertesPasswort) {
+    public void updateProperties(final String email, final String geaenderterVorname,
+            final String geaenderterNachname, final String geaendertesPasswort) {
         DBObject registrierung = queryByPrimaryKey(email);
 
         updateProperties(registrierung, geaenderterVorname, geaenderterNachname, geaendertesPasswort);
