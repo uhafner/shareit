@@ -40,7 +40,7 @@
     <guava.version>13.0.1</guava.version>
     <mongo.db.driver.version>2.9.3</mongo.db.driver.version>
     <mongo.db.embedded.version>1.27</mongo.db.embedded.version>
-    <junit.version>4.11</junit.version>
+    <junit.version>4.13.1</junit.version>
     <mockito.version>1.9.5</mockito.version>
 
     <!-- Maven Plug-ins Configuration -->
